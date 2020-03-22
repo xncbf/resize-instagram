@@ -4,6 +4,7 @@
         "django_settings": "resize.settings",
         "project_name": "resize",
         "runtime": "python3.7",
+        // "profile": "zappa",
         "s3_bucket": "zappa-8w5k7sdak"
     }
 }
