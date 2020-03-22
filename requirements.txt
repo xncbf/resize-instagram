@@ -1,3 +1,4 @@
 Django==3.0.4
 django-s3-storage==0.13.0
+psycopg2-binary==2.8.3
 zappa

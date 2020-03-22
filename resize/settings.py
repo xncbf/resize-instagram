@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'resize.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('RESIZE_DB_NAME'),
-        'USER': os.getenv('RESIZE_DB_USER'),
-        'PASSWORD': os.getenv('RESIZE_DB_PASSWORD'),
-        'HOST': os.getenv('RESIZE_DB_HOST'),
-        'PORT': os.getenv('RESIZE_DB_PORT')
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'resize',
+        'USER': os.getenv('R_DB_USER'),
+        'PASSWORD': os.getenv('R_DB_PASSWORD'),
+        'HOST': os.getenv('R_DB_HOST'),
+        'PORT': os.getenv('R_DB_PORT')
     }
 }
 
