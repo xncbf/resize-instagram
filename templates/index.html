@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block script %}
+    <script>
+        
+    function loadImage() {
+        var input, file, fr, img;
+
+        if (typeof window.FileReader !== 'function') {
+            write("The file API isn't supported on this browser yet.");
+            return;
+        }
+
+        input = document.getElementById('imgfile');
+        file = input.files[0];
+        fr = new FileReader();
+        fr.onload = createImage;
+        fr.readAsDataURL(file);
+
+        function createImage() {
+            img = new Image();
+            img.onload = imageLoaded;
+            img.src = fr.result;
+        }
+
+        function imageLoaded() {
+            var canvas = document.getElementById("canvas")
+            canvas.width = img.width;
+            canvas.height = img.height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img,0,0);
+            // alert(canvas.toDataURL("image/png"));
+        }
+
+        function write(msg) {
+            var p = document.createElement('p');
+            p.innerHTML = msg;
+            document.body.appendChild(p);
+        }
+    }
+    </script>
+{% endblock %}
+{% block contents %}
+<form action="#">
+    <!-- <img class="responsive-img" src="cool_pic.jpg"> -->
+    <canvas id="canvas" width="150" height="150"></canvas>
+    <div class="file-field input-field">
+        <div class="btn">
+            <span>File</span>
+            <input type="file" onchange='loadImage()' id="imgfile">
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+        </div>
+    </div>
+        
+</form>
+{% endblock%}
