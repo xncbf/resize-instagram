@@ -59,16 +59,17 @@
 
             window.addEventListener("resize", imageLoaded);
         }
-        var fd = new FormData();
-        // fd.append("name", "paul");
+        function sendForm(obj){
+            var fd = new FormData();
+            input = document.getElementById('imgfile');
+            fd.append("image", input.files[0]);
+            fd.append("key", "××××××××××××");
 
-        fd.append("image", canvas.mozGetAsFile("foo.png"));
-        fd.append("key", "××××××××××××");
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://your.api.com/upload.json");
-
-        xhr.send(fd);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "{% url 'index' %}");
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.send(fd);
+        }
 
     </script>
 {% endblock %}
@@ -111,11 +112,12 @@
             <p>
               <label>
                 <input value="1" class="with-gap" name="group1" type="radio" disabled/>
-                <span>Automatically update more  </span>
+                <span>Automatically update more</span>
               </label>
             </p>
         </form>
-        <a class="waves-effect waves-light btn deep-purple accent-1">Download Resized</a>
+        <a class="waves-effect waves-light btn deep-purple accent-1"
+            href="javascript:void(0);" onClick="sendForm();">Download Resized</a>
     </div>
 </div>
 {% endblock%}
