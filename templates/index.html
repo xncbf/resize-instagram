@@ -1,57 +1,121 @@
 {% extends "base.html" %}
 {% block script %}
     <script>
-        
-    function loadImage() {
-        var input, file, fr, img;
+        function loadImage() {
+            let input, file, fr, img;
+            if (typeof window.FileReader !== 'function') {
+                write("The file API isn't supported on this browser yet.");
+                return;
+            }
+            input = document.getElementById('imgfile');
+            file = input.files[0];
+            fr = new FileReader();
+            fr.onload = createImage;
+            fr.readAsDataURL(file);
 
-        if (typeof window.FileReader !== 'function') {
-            write("The file API isn't supported on this browser yet.");
-            return;
+            function createImage() {
+                img = new Image();
+                img.onload = imageLoaded;
+                img.src = fr.result;
+            }
+
+            function getXY(){
+                var MAX_WIDTH = Math.min(window.innerWidth-100, 500);
+                var MAX_HEIGHT = Math.min(window.innerHeight-100, 500);
+
+                var width = img.width;
+                var height = img.height;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+
+                    }
+                }
+                return [width, height]
+            }
+
+            function imageLoaded() {
+                var canvas = document.getElementById("canvas");
+                const [width, height] = getXY();
+                canvas.width = width;
+                canvas.height = height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img,0,0, width, height);
+                var dataurl = canvas.toDataURL("image/png");
+            }
+
+            function write(msg) {
+                var p = document.createElement('p');
+                p.innerHTML = msg;
+                document.body.appendChild(p);
+            }
+
+            window.addEventListener("resize", imageLoaded);
         }
+        var fd = new FormData();
+        // fd.append("name", "paul");
 
-        input = document.getElementById('imgfile');
-        file = input.files[0];
-        fr = new FileReader();
-        fr.onload = createImage;
-        fr.readAsDataURL(file);
+        fd.append("image", canvas.mozGetAsFile("foo.png"));
+        fd.append("key", "××××××××××××");
 
-        function createImage() {
-            img = new Image();
-            img.onload = imageLoaded;
-            img.src = fr.result;
-        }
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://your.api.com/upload.json");
 
-        function imageLoaded() {
-            var canvas = document.getElementById("canvas")
-            canvas.width = img.width;
-            canvas.height = img.height;
-            var ctx = canvas.getContext("2d");
-            ctx.drawImage(img,0,0);
-            // alert(canvas.toDataURL("image/png"));
-        }
+        xhr.send(fd);
 
-        function write(msg) {
-            var p = document.createElement('p');
-            p.innerHTML = msg;
-            document.body.appendChild(p);
-        }
-    }
     </script>
 {% endblock %}
 {% block contents %}
-<form action="#">
-    <!-- <img class="responsive-img" src="cool_pic.jpg"> -->
-    <canvas id="canvas" width="150" height="150"></canvas>
-    <div class="file-field input-field">
-        <div class="btn">
-            <span>File</span>
-            <input type="file" onchange='loadImage()' id="imgfile">
+<div class='row'>
+    <h1 class="deep-purple-text text-accent-1">RESIZE INSTAGRAM</h1>
+<div class='row'>
+    <form action="#">
+        <!-- <img class="responsive-img" src="cool_pic.jpg"> -->
+        <div class="file-field input-field">
+            <div class="btn deep-purple accent-1">
+                <span>File</span>
+                <input type="file" onchange='loadImage()' id="imgfile">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
         </div>
-        <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-        </div>
-    </div>
         
-</form>
+    </form>
+</div>
+<div class='row'>
+    <div class='col m12 l6'>
+        <canvas id="canvas"></canvas>
+    </div>
+    <div class='col m12 l6'>
+        <form action="#">
+            <p>
+              <label>
+                <input value="1" class="with-gap" name="group1" type="radio" checked />
+                <span>1:1</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input value="1" class="with-gap" name="group1" type="radio" />
+                <span>4:5</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input value="1" class="with-gap" name="group1" type="radio" disabled/>
+                <span>Automatically update more  </span>
+              </label>
+            </p>
+        </form>
+        <a class="waves-effect waves-light btn deep-purple accent-1">Download Resized</a>
+    </div>
+</div>
 {% endblock%}
