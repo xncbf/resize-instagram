@@ -21,15 +21,15 @@ body {
   border-radius: 50%;
   opacity: .25;
 }
-.div-gradient:nth-child(2) {
+.div-gradient.gradient1 {
   box-shadow: 0 0 45vmax 45vmax #ff00ff;
   animation: hue 10s 0s linear infinite, move1 19s 0s linear infinite;
 }
-.div-gradient:nth-child(3) {
+.div-gradient.gradient2 {
   box-shadow: 0 0 45vmax 45vmax #ffffff;
   animation: hue 15s 0s linear infinite, move2 25s 0s linear infinite;
 }
-.div-gradient:nth-child(4) {
+.div-gradient.gradient3 {
   box-shadow: 0 0 45vmax 45vmax #00ffff;
   animation: hue 20s 0s linear infinite, move3 15s 0s linear infinite;
   opacity: .2;
