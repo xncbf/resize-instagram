@@ -4,3 +4,8 @@
 [type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
     background-color: #b388ff !important;
 }
+input.valid[type=text]:not(.browser-default) {
+    border-bottom: 1px solid #b388ff !important;
+    -webkit-box-shadow: 0 1px 0 0 #b388ff !important;
+    box-shadow: 0 1px 0 0 #b388ff !important;
+}

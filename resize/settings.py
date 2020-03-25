@@ -128,3 +128,5 @@ AWS_S3_BUCKET_NAME_STATIC = "resize-static"
 # from the s3 bucket
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_S3_BUCKET_NAME_STATIC
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+AWS_S3_BUCKET_NAME_MEDIA = "resize-media"

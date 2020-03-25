@@ -62,8 +62,16 @@
         function sendForm(obj){
             var fd = new FormData();
             input = document.getElementById('imgfile');
+            const radio = document.getElementsByName('group1');
+            let ratio;
+            for(let i=0;i<radio.length;i++){
+                if (radio[i].checked){
+                    ratio = radio[i].value
+                    break;
+                }
+            }
             fd.append("image", input.files[0]);
-            fd.append("key", "××××××××××××");
+            fd.append("ratio", ratio);
 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "{% url 'index' %}");
@@ -105,13 +113,19 @@
             </p>
             <p>
               <label>
-                <input value="1" class="with-gap" name="group1" type="radio" />
+                <input value="2" class="with-gap" name="group1" type="radio" />
                 <span>4:5</span>
               </label>
             </p>
             <p>
               <label>
-                <input value="1" class="with-gap" name="group1" type="radio" disabled/>
+                <input value="3" class="with-gap" name="group1" type="radio" />
+                <span>5:4</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input class="with-gap" name="group1" type="radio" disabled/>
                 <span>Automatically update more</span>
               </label>
             </p>
