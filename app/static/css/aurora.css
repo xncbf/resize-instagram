@@ -20,6 +20,7 @@ body {
   height: .001vmin;
   border-radius: 50%;
   opacity: .25;
+  z-index: -999;
 }
 .div-gradient.gradient1 {
   box-shadow: 0 0 45vmax 45vmax #ff00ff;
