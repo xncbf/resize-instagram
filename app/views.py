@@ -43,7 +43,7 @@ class IndexView(TemplateView):
     template_name = 'index.html'
 
     def post(self, request, *args, **kwargs):
-        imgs = request.FILES['images']
+        imgs = request.FILES.getlist('images')
         for img in imgs:
             img = Image.open(img)
             ratio = request.POST['ratio']

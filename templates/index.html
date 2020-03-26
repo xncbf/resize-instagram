@@ -71,7 +71,7 @@
                 }
             };
             for (let i = 0; i < input.files.length; i++) {
-                fd.append(input.files[i].name, input.files[i])
+                fd.append('images', input.files[i])
             }
             fd.append("ratio", ratio);
 
