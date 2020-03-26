@@ -70,7 +70,9 @@
                     break;
                 }
             };
-            fd.append("images", [for (x of input.files) x]);
+            for (let i = 0; i < input.files.length; i++) {
+                fd.append(input.files[i].name, input.files[i])
+            }
             fd.append("ratio", ratio);
 
             var xhr = new XMLHttpRequest();
