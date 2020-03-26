@@ -7,6 +7,7 @@
         // "profile": "zappa",
         "s3_bucket": "zappa-8w5k7sdak",
         "async_source": "sns",
-        "async_resources": true
+        "async_resources": true,
+        "domain": "resize-instagram.com"
     }
 }
