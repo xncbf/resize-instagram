@@ -9,9 +9,6 @@
         "async_source": "sns",
         "async_resources": true,
         "domain": "resize-instagram.com",
-        "certificate_arn": "arn:aws:acm:us-east-1:494890851710:certificate/ce57df7b-b79c-405d-ba92-9c3d9df74e69",
-        "tags": {
-            "domain": "resize"
-        }
+        "certificate_arn": "arn:aws:acm:us-east-1:494890851710:certificate/ce57df7b-b79c-405d-ba92-9c3d9df74e69"
     }
 }
