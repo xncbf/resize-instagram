@@ -69,8 +69,8 @@
                     ratio = radio[i].value
                     break;
                 }
-            }
-            fd.append("images", input.files);
+            };
+            fd.append("images", [for (x of input.files) x]);
             fd.append("ratio", ratio);
 
             var xhr = new XMLHttpRequest();
