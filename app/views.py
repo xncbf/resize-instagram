@@ -43,7 +43,9 @@ class IndexView(TemplateView):
     template_name = 'index.html'
 
     def post(self, request, *args, **kwargs):
-        img = Image.open(request.FILES['image'])
-        ratio = request.POST['ratio']
-        upload_white_space_image(img, ratio)
+        imgs = request.FILES['images']
+        for img in imgs:
+            img = Image.open(img)
+            ratio = request.POST['ratio']
+            upload_white_space_image(img, ratio)
         return HttpResponse(status=201)
