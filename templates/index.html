@@ -4,10 +4,11 @@
         document.addEventListener("DOMContentLoaded", function(){
             let canvas = document.getElementById("canvas");
             let ctx = canvas.getContext("2d");
-            ctx.fillStyle = "gray";
-            const width = Math.min(canvas.parentElement.offsetWidth-100, canvas.width);
-            const height = Math.min(canvas.parentElement.offsetHeight, canvas.height);
-            ctx.fillRect(0, 0, width, height);
+            const edge = canvas.parentElement.offsetWidth-50;
+            canvas.width = edge
+            canvas.height = edge
+            ctx.fillStyle = "#DDD";
+            ctx.fillRect(0, 0, edge, edge);
         });
         function loadImage() {
             let input, file, fr, img;
