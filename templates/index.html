@@ -5,7 +5,9 @@
             let canvas = document.getElementById("canvas");
             let ctx = canvas.getContext("2d");
             ctx.fillStyle = "gray";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const width = Math.min(window.innerWidth-100, canvas.width);
+            const height = Math.min(window.innerHeight-100, canvas.height);
+            ctx.fillRect(0, 0, width, height);
         });
         function loadImage() {
             let input, file, fr, img;
