@@ -29,8 +29,8 @@
             }
 
             function getXY(element){
-                const MAX_WIDTH = Math.min(element.parentElement.offsetWidth-100, 500);
-                const MAX_HEIGHT = Math.min(element.parentElement.offsetHeight, 500);
+                const MAX_WIDTH = element.parentElement.offsetWidth-50;
+                const MAX_HEIGHT = MAX_WIDTH;
 
                 let width = img.width;
                 let height = img.height;
