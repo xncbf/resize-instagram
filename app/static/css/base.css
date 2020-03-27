@@ -9,3 +9,5 @@ input.valid[type=text]:not(.browser-default) {
     -webkit-box-shadow: 0 1px 0 0 #b388ff !important;
     box-shadow: 0 1px 0 0 #b388ff !important;
 }
+
+canvas{ border: 1px solid gray; }
