@@ -5,8 +5,8 @@
             let canvas = document.getElementById("canvas");
             let ctx = canvas.getContext("2d");
             ctx.fillStyle = "gray";
-            const width = Math.min(window.innerWidth-100, canvas.width);
-            const height = Math.min(window.innerHeight-100, canvas.height);
+            const width = Math.min(window.innerWidth, canvas.width);
+            const height = Math.min(window.innerHeight, canvas.height);
             ctx.fillRect(0, 0, width, height);
         });
         function loadImage() {
@@ -28,8 +28,8 @@
             }
 
             function getXY(){
-                const MAX_WIDTH = Math.min(window.innerWidth-100, 500);
-                const MAX_HEIGHT = Math.min(window.innerHeight-100, 500);
+                const MAX_WIDTH = Math.min(window.innerWidth, 500);
+                const MAX_HEIGHT = Math.min(window.innerHeight, 500);
 
                 let width = img.width;
                 let height = img.height;
@@ -112,7 +112,7 @@
 </div>
 <div class='row'>
     <div class='col m12 l6'>
-        <canvas id="canvas" width="500" height="500"></canvas>
+        <canvas id="canvas"></canvas>
     </div>
     <div class='col m12 l6'>
         <form action="#">
