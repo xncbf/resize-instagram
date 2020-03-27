@@ -5,8 +5,8 @@
             let canvas = document.getElementById("canvas");
             let ctx = canvas.getContext("2d");
             ctx.fillStyle = "gray";
-            const width = Math.min(window.innerWidth, canvas.width);
-            const height = Math.min(window.innerHeight, canvas.height);
+            const width = Math.min(canvas.parentElement.offsetWidth-100, canvas.width);
+            const height = Math.min(canvas.parentElement.offsetHeight, canvas.height);
             ctx.fillRect(0, 0, width, height);
         });
         function loadImage() {
@@ -27,9 +27,9 @@
                 img.src = fr.result;
             }
 
-            function getXY(){
-                const MAX_WIDTH = Math.min(window.innerWidth, 500);
-                const MAX_HEIGHT = Math.min(window.innerHeight, 500);
+            function getXY(element){
+                const MAX_WIDTH = Math.min(element.parentElement.offsetWidth-100, 500);
+                const MAX_HEIGHT = Math.min(element.parentElement.offsetHeight, 500);
 
                 let width = img.width;
                 let height = img.height;
@@ -51,7 +51,7 @@
 
             function imageLoaded() {
                 let canvas = document.getElementById("canvas");
-                const [width, height] = getXY();
+                const [width, height] = getXY(canvas);
                 canvas.width = width;
                 canvas.height = height;
                 let ctx = canvas.getContext("2d");
