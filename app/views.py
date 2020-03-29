@@ -16,28 +16,34 @@ RATIO_TUPLE = (
 )
 
 
-def get_thumbnail(img):
-    return img.resize((100, 100), Image.ANTIALIAS)
-
-def get_white_big_square(img):
-    "return a white-background-color image having the img in exact center"
-    size = (max(img.size),)*2
+def get_white_square(img, ratio):
+    max_size = max(img.size)
+    """return a white-background-color image having the img in ratio"""
+    if ratio == '1':
+        # 1:1
+        size = (max_size, )*2
+    elif ratio == '2':
+        # 4:5
+        size = (max_size, max_size/4*5)
+    elif ratio == '3':
+        # 5:4
+        size = (max_size/4*5, max_size)    
     layer = Image.new('RGB', size, (255,255,255))
     layer.paste(img, tuple(map(lambda x:(x[0]-x[1])//2, zip(size, img.size))))
     return layer
 
 @task_sns
-def upload_white_space_image(img, ratio):
+def upload_white_space_image(img, image_name, ratio):
     try:
-        img = get_white_big_square(img)
+        img = get_white_square(img, ratio)
         timestamp = int(datetime.datetime.now().timestamp()*1000000)
-        file_name = f'{timestamp}.jpg'
+        file_name = f'{timestamp}{image_name}'
+        img.thumbnail((128,128), Image.ANTIALIAS)
         img.save(file_name)
         upload_file(file_name)
         os.remove(file_name)
     except Exception as e:
-        pass
-    return HttpResponse(status=503)
+        return HttpResponse(status=503)
     
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -46,6 +52,7 @@ class IndexView(TemplateView):
         imgs = request.FILES.getlist('images')
         ratio = request.POST['ratio']
         for img in imgs:
+            image_name = img.name
             img = Image.open(img)
-            upload_white_space_image(img, ratio)
+            upload_white_space_image(img, image_name, ratio)
         return HttpResponse(status=201)

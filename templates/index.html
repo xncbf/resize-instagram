@@ -7,15 +7,12 @@
             const edge = canvas.parentElement.offsetWidth-50;
             canvas.width = edge
             canvas.height = edge
-            ctx.fillStyle = "#DDD";
+            ctx.fillStyle = "#FFF";
             ctx.fillRect(0, 0, edge, edge);
         });
+
         function loadImage() {
             let input, file, fr, img;
-            if (typeof window.FileReader !== 'function') {
-                write("The file API isn't supported on this browser yet.");
-                return;
-            }
             input = document.getElementById('imgfile');
             file = input.files[0];
             fr = new FileReader();
@@ -57,13 +54,7 @@
                 canvas.height = height;
                 let ctx = canvas.getContext("2d");
                 ctx.drawImage(img,0,0, width, height);
-                let dataurl = canvas.toDataURL("image/png");
-            }
-
-            function write(msg) {
-                let p = document.createElement('p');
-                p.innerHTML = msg;
-                document.body.appendChild(p);
+                // let dataurl = canvas.toDataURL("image/png");
             }
 
             window.addEventListener("resize", imageLoaded);
