@@ -15,7 +15,6 @@ RATIO_TUPLE = (
     (3, '5:4')
 )
 
-
 def get_white_square(img, ratio):
     max_size = max(img.size)
     """return a white-background-color image having the img in ratio"""
@@ -32,7 +31,6 @@ def get_white_square(img, ratio):
     layer.paste(img, tuple(map(lambda x:(x[0]-x[1])//2, zip(size, img.size))))
     return layer
 
-@task_sns
 def upload_white_space_image(img, image_name, ratio):
     try:
         img = get_white_square(img, ratio)

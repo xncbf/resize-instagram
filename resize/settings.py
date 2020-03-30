@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from .settings_pwa import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_s3_storage',
+    'pwa',
     'app'
 ]
 
@@ -130,3 +132,7 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_S3_BUCKET_NAME_STATIC
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 AWS_S3_BUCKET_NAME_MEDIA = "resize-media"
+
+STATICFILES_DIRS  = [
+    os.path.join ( BASE_DIR , ' static ' ),
+]
