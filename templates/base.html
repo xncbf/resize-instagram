@@ -1,4 +1,5 @@
 {% load static %}
+{% load pwa %}
 <!doctype html>
 
 <html lang="en">
@@ -9,6 +10,18 @@
     <meta name="description" content="Resize Instagram">
     <meta name="author" content="Resize Instagram">
 
+    <!-- facebook -->
+    <meta property="og:url" content="https://resize-instagram.com" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Resize instagram" />
+    <meta property="og:description" content="Simple resize image for instagram" />
+    <meta property="og:image" content="{% static 'ogimage.png' %}" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- pwa -->
+    {% progressive_web_app_meta %}
+
+    <link rel="icon" href="{% static 'favicon.ico' %}">
     <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
