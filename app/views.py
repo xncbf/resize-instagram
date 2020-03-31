@@ -1,3 +1,4 @@
+import copy
 import datetime
 import os
 
@@ -31,17 +32,17 @@ def get_white_square(img, ratio):
     layer.paste(img, tuple(map(lambda x:(x[0]-x[1])//2, zip(size, img.size))))
     return layer
 
-def upload_white_space_image(img, image_name, ratio):
-    try:
-        img = get_white_square(img, ratio)
-        timestamp = int(datetime.datetime.now().timestamp()*1000000)
-        file_name = f'{timestamp}{image_name}'
-        img.thumbnail((128,128), Image.ANTIALIAS)
-        img.save(file_name)
-        upload_file(file_name, object_name='thumbnail/'+file_name)
-        os.remove(file_name)
-    except Exception as e:
-        return HttpResponse(status=503)
+@task_sns
+def save_thumbnail(img, image_name):
+    timestamp = int(datetime.datetime.now().timestamp()*1000000)
+    file_name = f'{timestamp}{image_name}'
+    img.thumbnail((128,128), Image.ANTIALIAS)
+    img.save(file_name)
+    upload_file(file_name, object_name='thumbnail/'+file_name)
+    os.remove(file_name)
+
+def upload_white_space_image(img, ratio):
+    return get_white_square(img, ratio)
     
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -52,5 +53,7 @@ class IndexView(TemplateView):
         for img in imgs:
             image_name = img.name
             img = Image.open(img)
-            upload_white_space_image(img, image_name, ratio)
+            img = upload_white_space_image(img, ratio)
+            _img = copy.deepcopy(img)
+            save_thumbnail(_img, image_name)
         return HttpResponse(status=201)
