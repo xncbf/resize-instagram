@@ -2,7 +2,7 @@ import copy
 import datetime
 import os
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from PIL import Image
@@ -24,19 +24,30 @@ def get_white_square(img, ratio):
         size = (max_size, )*2
     elif ratio == '2':
         # 4:5
-        size = (max_size, max_size/4*5)
+        if int(img.size[0]/4*5) > img.size[1]:
+            size = (img.size[0], int(img.size[0]/4*5))
+        else:
+            size = (int(img.size[1]/5*4), img.size[1])
     elif ratio == '3':
         # 5:4
-        size = (max_size/4*5, max_size)    
+        if int(img.size[0]/5*4) > img.size[1]:
+            size = (img.size[0], int(img.size[0]/5*4))
+        else:
+            size = (int(img.size[1]/4*5), img.size[1])
     layer = Image.new('RGB', size, (255,255,255))
     layer.paste(img, tuple(map(lambda x:(x[0]-x[1])//2, zip(size, img.size))))
     return layer
 
 @task_sns
-def save_thumbnail(img, image_name):
-    timestamp = int(datetime.datetime.now().timestamp()*1000000)
-    file_name = f'{timestamp}{image_name}'
+def upload_image(img, image_name, file_name):
+    # upload origin image
+    img.save(file_name)
+    upload_file(file_name, object_name=file_name)
+    os.remove(file_name)
+
     img.thumbnail((128,128), Image.ANTIALIAS)
+    
+    # upload thumbnail image
     img.save(file_name)
     upload_file(file_name, object_name='thumbnail/'+file_name)
     os.remove(file_name)
@@ -50,10 +61,14 @@ class IndexView(TemplateView):
     def post(self, request, *args, **kwargs):
         imgs = request.FILES.getlist('images')
         ratio = request.POST['ratio']
+        results = []
         for img in imgs:
             image_name = img.name
             img = Image.open(img)
             img = upload_white_space_image(img, ratio)
-            _img = copy.deepcopy(img)
-            save_thumbnail(_img, image_name)
-        return HttpResponse(status=201)
+            
+            timestamp = int(datetime.datetime.now().timestamp()*1000000)
+            file_name = f'{timestamp}{image_name}'
+            upload_image(copy.deepcopy(img), image_name, file_name)
+            results.append(file_name)
+        return JsonResponse(results, status=201, safe=False)
