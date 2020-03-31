@@ -17,12 +17,13 @@ def upload_file(file_name, bucket=AWS_S3_BUCKET_NAME_MEDIA, object_name=None):
     # If S3 object_name was not specified, use file_name
     if object_name is None:
         object_name = file_name
-
+    
+    # session = boto3.Session(profile_name='zappa')
     # Upload the file
     s3_client = boto3.client('s3')
     try:
-        response = s3_client.upload_file(file_name, bucket, object_name)
-    except ClientError as e:
+        s3_client.upload_file(file_name, bucket, object_name)
+    except Exception as e:
         logging.error(e)
         return False
     return True

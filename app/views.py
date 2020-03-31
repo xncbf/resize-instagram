@@ -38,7 +38,7 @@ def upload_white_space_image(img, image_name, ratio):
         file_name = f'{timestamp}{image_name}'
         img.thumbnail((128,128), Image.ANTIALIAS)
         img.save(file_name)
-        upload_file(file_name)
+        upload_file(file_name, object_name='thumbnail/'+file_name)
         os.remove(file_name)
     except Exception as e:
         return HttpResponse(status=503)
