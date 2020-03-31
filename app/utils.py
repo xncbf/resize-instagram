@@ -22,7 +22,7 @@ def upload_file(file_name, bucket=AWS_S3_BUCKET_NAME_MEDIA, object_name=None):
     # Upload the file
     s3_client = boto3.client('s3')
     try:
-        s3_client.upload_file(file_name, bucket, object_name)
+        s3_client.upload_file(file_name, bucket, object_name, ExtraArgs={'ACL':'public-read'})
     except Exception as e:
         logging.error(e)
         return False
