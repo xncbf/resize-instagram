@@ -49,10 +49,10 @@ def upload_image(img, image_name, file_name):
     img.thumbnail((128,128), Image.ANTIALIAS)
     byte_th_img = image_to_byte_array(img)
     # upload origin image
-    async_upload_file(file_name, byte_img, object_name=file_name)
+    async_upload_file(file_name, str(byte_img), object_name=file_name)
     
     # upload thumbnail image
-    async_upload_file(file_name, byte_th_img, object_name='thumbnail/'+file_name)
+    async_upload_file(file_name, str(byte_th_img), object_name='thumbnail/'+file_name)
 
 def upload_white_space_image(img, ratio):
     return get_white_square(img, ratio)
