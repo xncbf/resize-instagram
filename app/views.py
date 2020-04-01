@@ -53,13 +53,13 @@ def upload_image(img, image_name):
     th = copy.deepcopy(img)
     th.thumbnail((128,128), Image.ANTIALIAS)
     img.save('/tmp/'+file_name)
-    img.thumbnail((128,128), Image.ANTIALIAS)
-    img.save('/tmp/th_' + file_name)
+    # img.thumbnail((128,128), Image.ANTIALIAS)
+    # img.save('/tmp/th_' + file_name)
     # upload origin image
     async_upload_file('/tmp/'+file_name, object_name=file_name)
     
     # upload thumbnail image
-    async_upload_file('/tmp/th_'+file_name, object_name='thumbnail/'+file_name)
+    # async_upload_file('/tmp/th_'+file_name, object_name='thumbnail/'+file_name)
     return file_name
 
 def upload_white_space_image(img, ratio):
