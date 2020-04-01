@@ -1,20 +1,26 @@
 import copy
 import datetime
+import io
 import os
 
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from PIL import Image
-from zappa.asynchronous import task_sns
 
-from app.utils import upload_file
+from app.utils import async_upload_file
 
 RATIO_TUPLE = (
     (1, '1:1'),
     (2, '4:5'),
     (3, '5:4')
 )
+
+def image_to_byte_array(image:Image):
+  imgByteArr = io.BytesIO()
+  image.save(imgByteArr, format='PNG')
+  imgByteArr = imgByteArr.getvalue()
+  return imgByteArr
 
 def get_white_square(img, ratio):
     max_size = max(img.size)
@@ -38,20 +44,15 @@ def get_white_square(img, ratio):
     layer.paste(img, tuple(map(lambda x:(x[0]-x[1])//2, zip(size, img.size))))
     return layer
 
-def save_image(img, file_name):
-    img.save(file_name)
+def upload_image(img, image_name, file_name):
+    byte_img = image_to_byte_array(img)
     img.thumbnail((128,128), Image.ANTIALIAS)
-    img.save('th_' + file_name)
-
-@task_sns
-def async_upload_image(image_name, file_name):
+    byte_th_img = image_to_byte_array(img)
     # upload origin image
-    upload_file(file_name, object_name=file_name)
-    os.remove(file_name)
+    async_upload_file(file_name, byte_img, object_name=file_name)
     
     # upload thumbnail image
-    upload_file(file_name, object_name='thumbnail/'+file_name)
-    os.remove('th_' + file_name)
+    async_upload_file(file_name, byte_th_img, object_name='thumbnail/'+file_name)
 
 def upload_white_space_image(img, ratio):
     return get_white_square(img, ratio)
@@ -70,7 +71,6 @@ class IndexView(TemplateView):
             
             timestamp = int(datetime.datetime.now().timestamp()*1000000)
             file_name = f'{timestamp}{image_name}'
-            save_image(img, file_name)
-            async_upload_image(copy.deepcopy(img), image_name, file_name)
+            upload_image(img, image_name, file_name)
             results.append(file_name)
         return JsonResponse(results, status=201, safe=False)
