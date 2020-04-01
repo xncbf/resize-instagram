@@ -7,7 +7,7 @@ from zappa.asynchronous import task_sns
 
 from resize.settings import AWS_S3_BUCKET_NAME_MEDIA
 
-@task_sns
+# @task_sns
 def async_upload_file(file_name, byte_img:str, bucket=AWS_S3_BUCKET_NAME_MEDIA, object_name=None):
     """Upload a file to an S3 bucket
 
