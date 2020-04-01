@@ -11,3 +11,17 @@ input.valid[type=text]:not(.browser-default) {
 }
 
 /* canvas{ border: 1px solid gray; } */
+
+.progress {
+    position: relative;
+    height: 4px;
+    display: block;
+    width: 100%;
+    background-color: #a16bff !important;
+    border-radius: 2px;
+    margin: 0 !important;
+    overflow: hidden;
+}
+.progress .indeterminate {
+    background-color: #c5a3ff;
+}

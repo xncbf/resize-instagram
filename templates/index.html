@@ -2,6 +2,9 @@
 {% block script %}
     <script>
         document.addEventListener("DOMContentLoaded", function(){
+            [].forEach.call(document.querySelectorAll('.progress'), function (el) {
+                el.style.visibility = 'hidden';
+            });
             let canvas = document.getElementById("canvas");
             let ctx = canvas.getContext("2d");
             const edge = canvas.parentElement.offsetWidth-50;
@@ -81,6 +84,9 @@
                 if (xhr.readyState === 4) {
                     let res = JSON.parse(xhr.response)
                     for(let i=0;i<res.length;i++){
+                        [].forEach.call(document.querySelectorAll('.progress'), function (el) {
+                            el.style.visibility = 'hidden';
+                        });
                         var toastHTML = `<a download="custom-filename.jpg" href="https://resize-media.s3.ap-northeast-2.amazonaws.com/${res[i]}" title="ImageName">Download</a>`;
                         M.toast({html: toastHTML, displayLength:50000});
                     }
@@ -88,7 +94,10 @@
             }
             xhr.open("POST", "{% url 'index' %}");
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            xhr.send(fd);
+            xhr.send(fd);            
+            [].forEach.call(document.querySelectorAll('.progress'), function (el) {
+                el.style.visibility = '';
+            });
             
         }
 
