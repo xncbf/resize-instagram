@@ -16,11 +16,11 @@ RATIO_TUPLE = (
     (3, '5:4')
 )
 
-# def image_to_byte_array(image:Image):
-#   imgByteArr = io.BytesIO()
-#   image.save(imgByteArr, format='PNG')
-#   imgByteArr = imgByteArr.getvalue()
-#   return imgByteArr
+def image_to_byte_array(image:Image):
+  imgByteArr = io.BytesIO()
+  image.save(imgByteArr, format='PNG')
+  imgByteArr = imgByteArr.getvalue()
+  return imgByteArr
 
 def get_white_square(img, ratio):
     max_size = max(img.size)
@@ -45,21 +45,21 @@ def get_white_square(img, ratio):
     return layer
 
 def upload_image(img, image_name):
-    # byte_img = image_to_byte_array(img)
-    # img.thumbnail((128,128), Image.ANTIALIAS)
-    # byte_th_img = image_to_byte_array(img)
+    byte_img = image_to_byte_array(img)
+    img.thumbnail((128,128), Image.ANTIALIAS)
+    byte_th_img = image_to_byte_array(img)
     timestamp = int(datetime.datetime.now().timestamp()*1000000)
     file_name = f'{timestamp}{image_name}'
-    th = copy.deepcopy(img)
-    th.thumbnail((128,128), Image.ANTIALIAS)
-    img.save('/tmp/'+file_name)
+    # th = copy.deepcopy(img)
+    # th.thumbnail((128,128), Image.ANTIALIAS)
+    # img.save('/tmp/'+file_name)
     # img.thumbnail((128,128), Image.ANTIALIAS)
     # img.save('/tmp/th_' + file_name)
     # upload origin image
-    async_upload_file('/tmp/'+file_name, object_name=file_name)
+    async_upload_file(file_name, byte_img, object_name=file_name)
     
     # upload thumbnail image
-    # async_upload_file('/tmp/th_'+file_name, object_name='thumbnail/'+file_name)
+    async_upload_file(file_name, byte_th_img, object_name='thumbnail/'+file_name)
     return file_name
 
 def upload_white_space_image(img, ratio):
