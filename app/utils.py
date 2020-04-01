@@ -25,17 +25,11 @@ def async_upload_file(file_name, bucket=AWS_S3_BUCKET_NAME_MEDIA, object_name=No
     # session = boto3.Session(profile_name='zappa')
     # Upload the file
     s3_client = boto3.client('s3')
-    try:
-        s3_client.upload_file(file_name, bucket, object_name, ExtraArgs={'ACL':'public-read'})
-        os.remove(file_name)
-        # response = s3_client.put_object( 
-        #     Bucket=bucket,
-        #     Body=eval(byte_img),
-        #     Key=object_name,
-        #     ACL='public-read'
-        # )
-
-    except Exception as e:
-        logging.error(e)
-        return False
-    return True
+    s3_client.upload_file(file_name, bucket, object_name, ExtraArgs={'ACL':'public-read'})
+    os.remove(file_name)
+    # response = s3_client.put_object( 
+    #     Bucket=bucket,
+    #     Body=eval(byte_img),
+    #     Key=object_name,
+    #     ACL='public-read'
+    # )
