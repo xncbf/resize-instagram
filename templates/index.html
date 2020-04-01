@@ -65,6 +65,7 @@
         function sendForm(obj){
             let fd = new FormData();
             input = document.getElementById('imgfile');
+            if(!input.value){ return };
             const radio = document.getElementsByName('group1');
             let ratio;
             for(let i=0;i<radio.length;i++){

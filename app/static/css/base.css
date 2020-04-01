@@ -23,5 +23,5 @@ input.valid[type=text]:not(.browser-default) {
     overflow: hidden;
 }
 .progress .indeterminate {
-    background-color: #c5a3ff;
+    background-color: #c5a3ff !important;
 }
