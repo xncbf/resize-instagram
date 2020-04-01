@@ -88,7 +88,7 @@
                         [].forEach.call(document.querySelectorAll('.progress'), function (el) {
                             el.style.visibility = 'hidden';
                         });
-                        document.getElementById('btn').removeAttribute("disabled")
+                        document.getElementById('btn').removeAttribute("disabled");
                         var toastHTML = `<a download="custom-filename.jpg" href="https://resize-media.s3.ap-northeast-2.amazonaws.com/${res[i]}" title="ImageName">Download</a>`;
                         M.toast({html: toastHTML, displayLength:50000});
                     }
@@ -97,7 +97,7 @@
             xhr.open("POST", "{% url 'index' %}");
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
             xhr.send(fd);            
-            document.getElementById('btn').setAttribute("disabled", true)
+            document.getElementById('btn').setAttribute("disabled", true);
             [].forEach.call(document.querySelectorAll('.progress'), function (el) {
                 el.style.visibility = '';
             });
