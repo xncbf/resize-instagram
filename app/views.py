@@ -38,19 +38,20 @@ def get_white_square(img, ratio):
     layer.paste(img, tuple(map(lambda x:(x[0]-x[1])//2, zip(size, img.size))))
     return layer
 
-@task_sns
-def upload_image(img, image_name, file_name):
-    # upload origin image
+def save_image(img, file_name):
     img.save(file_name)
+    img.thumbnail((128,128), Image.ANTIALIAS)
+    img.save('th_' + file_name)
+
+@task_sns
+def async_upload_image(image_name, file_name):
+    # upload origin image
     upload_file(file_name, object_name=file_name)
     os.remove(file_name)
-
-    img.thumbnail((128,128), Image.ANTIALIAS)
     
     # upload thumbnail image
-    img.save(file_name)
     upload_file(file_name, object_name='thumbnail/'+file_name)
-    os.remove(file_name)
+    os.remove('th_' + file_name)
 
 def upload_white_space_image(img, ratio):
     return get_white_square(img, ratio)
@@ -69,6 +70,7 @@ class IndexView(TemplateView):
             
             timestamp = int(datetime.datetime.now().timestamp()*1000000)
             file_name = f'{timestamp}{image_name}'
-            upload_image(copy.deepcopy(img), image_name, file_name)
+            save_image(img, file_name)
+            async_upload_image(copy.deepcopy(img), image_name, file_name)
             results.append(file_name)
         return JsonResponse(results, status=201, safe=False)
