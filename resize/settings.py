@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from .settings_pwa import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -132,3 +131,37 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_S3_BUCKET_NAME_STATIC
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 AWS_S3_BUCKET_NAME_MEDIA = "resize-media"
+
+# STATICFILES_DIRS = [
+#     STATIC_URL,
+# ]
+
+PWA_APP_NAME = 'Resize'
+PWA_APP_DESCRIPTION = "Resize Instagram"
+PWA_APP_THEME_COLOR = '#de91ff'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'fullscreen' # standalone
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_ICONS = [
+    {
+        'src': STATIC_URL + '/icon.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': STATIC_URL + '/icon.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': STATIC_URL + '/icon.png', # 640x1136
+        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    }
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'en-US'
+PWA_APP_DEBUG_MODE = DEBUG
