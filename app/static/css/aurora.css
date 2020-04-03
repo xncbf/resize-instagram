@@ -24,15 +24,15 @@ body {
 }
 .div-gradient.gradient1 {
   box-shadow: 0 0 45vmax 45vmax #ff00ff;
-  animation: hue 10s 0s linear infinite, move1 19s 0s linear infinite;
+  /* animation: hue 10s 0s linear infinite, move1 19s 0s linear infinite; */
 }
 .div-gradient.gradient2 {
   box-shadow: 0 0 45vmax 45vmax #ffffff;
-  animation: hue 15s 0s linear infinite, move2 25s 0s linear infinite;
+  /* animation: hue 15s 0s linear infinite, move2 25s 0s linear infinite; */
 }
 .div-gradient.gradient3 {
   box-shadow: 0 0 45vmax 45vmax #00ffff;
-  animation: hue 20s 0s linear infinite, move3 15s 0s linear infinite;
+  /* animation: hue 20s 0s linear infinite, move3 15s 0s linear infinite; */
   opacity: .2;
 }
 @keyframes hue {
