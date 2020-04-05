@@ -29,3 +29,7 @@ input.valid[type=text]:not(.browser-default) {
 .collection a.collection-item {
     color: #c5a3ff;
 }
+
+.collection {
+    border: 0px !important;
+}
