@@ -1,5 +1,6 @@
 import copy
 import datetime
+import logging
 import io
 import os
 
@@ -9,6 +10,9 @@ from django.views.generic import TemplateView
 from PIL import Image
 
 from app.utils import async_upload_file
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 
 RATIO_TUPLE = (
     (1, '1:1'),
@@ -52,16 +56,21 @@ def upload_image(img, image_name, file_name):
     # img.thumbnail((128,128), Image.ANTIALIAS)
     # byte_th_img = image_to_byte_array(img)
     # save file
+    logger.debug('4')
     th = copy.deepcopy(img)
     th.thumbnail((128,128), Image.ANTIALIAS)
     img.save('/tmp/'+file_name)
+    logger.debug('5')
     img.thumbnail((128,128), Image.ANTIALIAS)
     img.save('/tmp/th_' + file_name)
+    logger.debug('6')
     # upload origin image
     async_upload_file('/tmp/'+file_name, object_name=file_name)
+    logger.debug('7')
     
     # upload thumbnail image
     async_upload_file('/tmp/th_' + file_name, object_name='thumbnail/'+file_name)
+    logger.debug('8')
 
 def upload_white_space_image(img, ratio):
     return get_white_square(img, ratio)
@@ -70,15 +79,19 @@ class IndexView(TemplateView):
     template_name = 'index.html'
 
     def post(self, request, *args, **kwargs):
+        logger.debug('1')
         imgs = request.FILES.getlist('images')
         ratio = request.POST['ratio']
         results = []
         for img in imgs:
             image_name = img.name
             img = Image.open(img)
+            logger.debug('2')
             img = upload_white_space_image(img, ratio)
+            logger.debug('3')
             timestamp = int(datetime.datetime.now().timestamp()*1000000)
             file_name = f'{timestamp}{image_name}'
             upload_image(img, image_name, file_name)
+            logger.debug('9')
             results.append(file_name)
         return JsonResponse(results, status=201, safe=False)
