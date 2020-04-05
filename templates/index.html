@@ -15,60 +15,52 @@
         
 
             document.getElementById('imgfile').onchange = function(evt) {
-                ImageTools.resize(this.files[0], {
-                    width: 800, // maximum width
-                    height: 800 // maximum height
-                }, function(blob, didItResize) {
-                    
-                    // document.getElementById('preview').src = window.URL.createObjectURL(blob);
-                    
-                    let input, file, fr, img;
-                    input = document.getElementById('imgfile');
-                    file = input.files[0];
-                    fr = new FileReader();
-                    fr.onload = createImage;
-                    fr.readAsDataURL(file);
+                let input, file, fr, img;
+                input = document.getElementById('imgfile');
+                file = input.files[0];
+                fr = new FileReader();
+                fr.onload = createImage;
+                fr.readAsDataURL(file);
 
-                    function createImage() {
-                        img = new Image();
-                        img.onload = imageLoaded;
-                        img.src = fr.result;
-                    }
+                function createImage() {
+                    img = new Image();
+                    img.onload = imageLoaded;
+                    img.src = fr.result;
+                }
 
-                    function getXY(element){
-                        const MAX_WIDTH = element.parentElement.offsetWidth-50;
-                        const MAX_HEIGHT = MAX_WIDTH;
+                function getXY(element){
+                    const MAX_WIDTH = element.parentElement.offsetWidth-50;
+                    const MAX_HEIGHT = MAX_WIDTH;
 
-                        let width = img.width;
-                        let height = img.height;
+                    let width = img.width;
+                    let height = img.height;
 
-                        if (width > height) {
-                            if (width > MAX_WIDTH) {
-                                height *= MAX_WIDTH / width;
-                                width = MAX_WIDTH;
-                            }
-                        } else {
-                            if (height > MAX_HEIGHT) {
-                                width *= MAX_HEIGHT / height;
-                                height = MAX_HEIGHT;
-
-                            }
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
                         }
-                        return [width, height]
-                    }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
 
-                    function imageLoaded() {
-                        let canvas = document.getElementById("canvas");
-                        const [width, height] = getXY(canvas);
-                        canvas.width = width;
-                        canvas.height = height;
-                        let ctx = canvas.getContext("2d");
-                        ctx.drawImage(img,0,0, width, height);
-                        // let dataurl = canvas.toDataURL("image/png");
+                        }
                     }
+                    return [width, height]
+                }
 
-                    window.addEventListener("resize", imageLoaded);
-                });
+                function imageLoaded() {
+                    let canvas = document.getElementById("canvas");
+                    const [width, height] = getXY(canvas);
+                    canvas.width = width;
+                    canvas.height = height;
+                    let ctx = canvas.getContext("2d");
+                    ctx.drawImage(img,0,0, width, height);
+                    // let dataurl = canvas.toDataURL("image/png");
+                }
+
+                window.addEventListener("resize", imageLoaded);
             };
         });
         function sendForm(obj){
@@ -84,41 +76,51 @@
                 }
             };
             for (let i = 0; i < input.files.length; i++) {
-                fd.append('images', input.files[i])
-            }
-            fd.append("ratio", ratio);
-
-            let xhr = new XMLHttpRequest();
-            
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    let res = JSON.parse(xhr.response)
-                    for(let i=0;i<res.length;i++){
-                        [].forEach.call(document.querySelectorAll('.progress'), function (el) {
-                            el.style.visibility = 'hidden';
-                        });
-                        document.getElementById('btn').removeAttribute("disabled");
-                        let HTML = `<span>Done!</span>`;
-                        M.toast({html: HTML, displayLength:4000});
-                        HTML = `<a 
-                            download="custom-filename.jpg"
-                            href="https://resize-media.s3.ap-northeast-2.amazonaws.com/${res[i]}"
-                            title="ImageName"
-                            class="collection-item">
-                            ${res[i].slice(16)}
-                        </a>`;
-                        document.getElementsByClassName('collection')[0].innerHTML += HTML
+                
+                ImageTools.resize(input.files[i], {
+                        width: 800, // maximum width
+                        height: 800 // maximum height
+                    }, function(blob, didItResize) {
+                        // fd.append('images', input.files[i])
+                        fd.append('images', blob)
+                        // document.getElementById('preview').src = window.URL.createObjectURL(blob);
                         
-                    }
-                }
+                        fd.append("ratio", ratio);
+
+                        let xhr = new XMLHttpRequest();
+
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4) {
+                                let res = JSON.parse(xhr.response)
+                                for(let i=0;i<res.length;i++){
+                                    [].forEach.call(document.querySelectorAll('.progress'), function (el) {
+                                        el.style.visibility = 'hidden';
+                                    });
+                                    document.getElementById('btn').removeAttribute("disabled");
+                                    let HTML = `<span>Done!</span>`;
+                                    M.toast({html: HTML, displayLength:4000});
+                                    HTML = `<a 
+                                        download="custom-filename.jpg"
+                                        href="https://resize-media.s3.ap-northeast-2.amazonaws.com/${res[i]}"
+                                        title="ImageName"
+                                        class="collection-item">
+                                        ${res[i]}
+                                    </a>`;
+                                    document.getElementsByClassName('collection')[0].innerHTML += HTML
+                                    
+                                }
+                            }
+                        }
+                        xhr.open("POST", "{% url 'index' %}");
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        xhr.send(fd);            
+                        document.getElementById('btn').setAttribute("disabled", true);
+                        [].forEach.call(document.querySelectorAll('.progress'), function (el) {
+                            el.style.visibility = '';
+                        });
+                });
+                
             }
-            xhr.open("POST", "{% url 'index' %}");
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            xhr.send(fd);            
-            document.getElementById('btn').setAttribute("disabled", true);
-            [].forEach.call(document.querySelectorAll('.progress'), function (el) {
-                el.style.visibility = '';
-            });
             
         }
 
