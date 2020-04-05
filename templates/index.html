@@ -12,56 +12,65 @@
             canvas.height = edge
             ctx.fillStyle = "#FFF";
             ctx.fillRect(0, 0, edge, edge);
+        
+
+            document.getElementById('imgfile').onchange = function(evt) {
+                ImageTools.resize(this.files[0], {
+                    width: 800, // maximum width
+                    height: 800 // maximum height
+                }, function(blob, didItResize) {
+                    
+                    // document.getElementById('preview').src = window.URL.createObjectURL(blob);
+                    
+                    let input, file, fr, img;
+                    input = document.getElementById('imgfile');
+                    file = input.files[0];
+                    fr = new FileReader();
+                    fr.onload = createImage;
+                    fr.readAsDataURL(file);
+
+                    function createImage() {
+                        img = new Image();
+                        img.onload = imageLoaded;
+                        img.src = fr.result;
+                    }
+
+                    function getXY(element){
+                        const MAX_WIDTH = element.parentElement.offsetWidth-50;
+                        const MAX_HEIGHT = MAX_WIDTH;
+
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) {
+                                height *= MAX_WIDTH / width;
+                                width = MAX_WIDTH;
+                            }
+                        } else {
+                            if (height > MAX_HEIGHT) {
+                                width *= MAX_HEIGHT / height;
+                                height = MAX_HEIGHT;
+
+                            }
+                        }
+                        return [width, height]
+                    }
+
+                    function imageLoaded() {
+                        let canvas = document.getElementById("canvas");
+                        const [width, height] = getXY(canvas);
+                        canvas.width = width;
+                        canvas.height = height;
+                        let ctx = canvas.getContext("2d");
+                        ctx.drawImage(img,0,0, width, height);
+                        // let dataurl = canvas.toDataURL("image/png");
+                    }
+
+                    window.addEventListener("resize", imageLoaded);
+                });
+            };
         });
-
-        function loadImage() {
-            let input, file, fr, img;
-            input = document.getElementById('imgfile');
-            file = input.files[0];
-            fr = new FileReader();
-            fr.onload = createImage;
-            fr.readAsDataURL(file);
-
-            function createImage() {
-                img = new Image();
-                img.onload = imageLoaded;
-                img.src = fr.result;
-            }
-
-            function getXY(element){
-                const MAX_WIDTH = element.parentElement.offsetWidth-50;
-                const MAX_HEIGHT = MAX_WIDTH;
-
-                let width = img.width;
-                let height = img.height;
-
-                if (width > height) {
-                    if (width > MAX_WIDTH) {
-                        height *= MAX_WIDTH / width;
-                        width = MAX_WIDTH;
-                    }
-                } else {
-                    if (height > MAX_HEIGHT) {
-                        width *= MAX_HEIGHT / height;
-                        height = MAX_HEIGHT;
-
-                    }
-                }
-                return [width, height]
-            }
-
-            function imageLoaded() {
-                let canvas = document.getElementById("canvas");
-                const [width, height] = getXY(canvas);
-                canvas.width = width;
-                canvas.height = height;
-                let ctx = canvas.getContext("2d");
-                ctx.drawImage(img,0,0, width, height);
-                // let dataurl = canvas.toDataURL("image/png");
-            }
-
-            window.addEventListener("resize", imageLoaded);
-        }
         function sendForm(obj){
             let fd = new FormData();
             input = document.getElementById('imgfile');
@@ -125,7 +134,7 @@
         <div class="file-field input-field">
             <div class="btn deep-purple accent-1">
                 <span>Upload Images</span>
-                <input type="file" onchange='loadImage()' id="imgfile" accept="image/*" multiple>
+                <input type="file" id="imgfile" accept="image/*" multiple>
             </div>
             <div class="file-path-wrapper">
                 <input class="file-path validate" type="text" placeholder="Upload one or more files">
