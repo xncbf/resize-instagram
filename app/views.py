@@ -77,6 +77,6 @@ class IndexView(TemplateView):
             img = upload_white_space_image(img, ratio)
             timestamp = int(datetime.datetime.now().timestamp()*1000000)
             file_name = f'{timestamp}{image_name}'
-            upload_image(img, file_name, image_name)
+            upload_image(img, image_name, file_name)
             results.append(file_name)
         return JsonResponse(results, status=201, safe=False)
