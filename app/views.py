@@ -44,23 +44,22 @@ def get_white_square(img, ratio):
     layer.paste(img, tuple(map(lambda x:(x[0]-x[1])//2, zip(size, img.size))))
     return layer
 
-def upload_image(img, image_name):
-    byte_img = image_to_byte_array(img)
-    img.thumbnail((128,128), Image.ANTIALIAS)
-    byte_th_img = image_to_byte_array(img)
-    timestamp = int(datetime.datetime.now().timestamp()*1000000)
-    file_name = f'{timestamp}{image_name}'
-    # th = copy.deepcopy(img)
-    # th.thumbnail((128,128), Image.ANTIALIAS)
-    # img.save('/tmp/'+file_name)
+def upload_image(img, image_name, file_name):
+    # stream byte
+    # byte_img = image_to_byte_array(img)
     # img.thumbnail((128,128), Image.ANTIALIAS)
-    # img.save('/tmp/th_' + file_name)
+    # byte_th_img = image_to_byte_array(img)
+    # save file
+    th = copy.deepcopy(img)
+    th.thumbnail((128,128), Image.ANTIALIAS)
+    img.save('/tmp/'+file_name)
+    img.thumbnail((128,128), Image.ANTIALIAS)
+    img.save('/tmp/th_' + file_name)
     # upload origin image
-    async_upload_file(file_name, byte_img, object_name=file_name)
+    async_upload_file('/tmp/'+file_name, object_name=file_name)
     
     # upload thumbnail image
-    async_upload_file(file_name, byte_th_img, object_name='thumbnail/'+file_name)
-    return file_name
+    async_upload_file('/tmp/th_' + file_name, object_name='thumbnail/'+file_name)
 
 def upload_white_space_image(img, ratio):
     return get_white_square(img, ratio)
@@ -76,6 +75,8 @@ class IndexView(TemplateView):
             image_name = img.name
             img = Image.open(img)
             img = upload_white_space_image(img, ratio)
-            file_name = upload_image(img, image_name)
+            timestamp = int(datetime.datetime.now().timestamp()*1000000)
+            file_name = f'{timestamp}{image_name}'
+            upload_image(img, file_name, image_name)
             results.append(file_name)
         return JsonResponse(results, status=201, safe=False)
