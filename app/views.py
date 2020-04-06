@@ -30,7 +30,7 @@ def image_to_byte_array(image:Image):
 
 
 def get_white_square(img, ratio):
-    img.thumbnail((800,800), Image.ANTIALIAS)
+    # img.thumbnail((800,800), Image.ANTIALIAS)
     max_size = max(img.size)
     """return a white-background-color image having the img in ratio"""
     if ratio == '1':
