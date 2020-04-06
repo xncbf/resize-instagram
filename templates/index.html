@@ -82,7 +82,7 @@
                         height: 800 // maximum height
                     }, function(blob, didItResize) {
                         // fd.append('images', input.files[i])
-                        fd.append('images', blob)
+                        fd.set('images', blob)
                         // document.getElementById('preview').src = window.URL.createObjectURL(blob);
                         
                         fd.append("ratio", ratio);
