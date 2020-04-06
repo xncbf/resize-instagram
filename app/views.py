@@ -92,5 +92,5 @@ class IndexView(TemplateView):
             s3_file_path=f'{today.year}/{today.month}/{today.day}/'
 
             upload_image(img, image_name, file_name, s3_file_path)
-            results.append(file_name)
+            results.append(s3_file_path+file_name)
         return JsonResponse(results, status=201, safe=False)
