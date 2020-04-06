@@ -5,6 +5,9 @@
             [].forEach.call(document.querySelectorAll('.progress'), function (el) {
                 el.style.visibility = 'hidden';
             });
+            [].forEach.call(document.querySelectorAll('.div-gradient'), function (el) {
+                el.style.webkitAnimationPlayState = 'paused';
+            });
             let canvas = document.getElementById("canvas");
             let ctx = canvas.getContext("2d");
             const edge = canvas.parentElement.offsetWidth-50;
