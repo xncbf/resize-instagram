@@ -16,6 +16,18 @@
             ctx.fillStyle = "#FFF";
             ctx.fillRect(0, 0, edge, edge);
         
+            
+            document.getElementById('checkbox').onchange = function(evt) {
+                if (this.checked) {
+                    [].forEach.call(document.querySelectorAll('.div-gradient'), function (el) {
+                        el.style.webkitAnimationPlayState = 'paused';
+                    });
+                } else {
+                    [].forEach.call(document.querySelectorAll('.div-gradient'), function (el) {
+                        el.style.webkitAnimationPlayState = '';
+                    });
+                }
+            };
 
             document.getElementById('imgfile').onchange = function(evt) {
                 let input, file, fr, img;
@@ -131,7 +143,19 @@
 {% endblock %}
 {% block contents %}
 <div class='row'>
-    <h3 class="white-text">RESIZE INSTAGRAM</h3>
+    <div class='col s12 m9 l9'>
+        <h3 class="white-text">RESIZE INSTAGRAM</h3>
+    </div>
+    <div class='col s12 m3 l3'>
+        <div class="switch hide-on-small-only right-align">
+            <label>
+            Off
+            <input type="checkbox" id='checkbox' checked>
+            <span class="lever"></span>
+            FAST MODE
+            </label>
+        </div>
+    </div>
 </div>
 <div class='row'>
     <form action="#">

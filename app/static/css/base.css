@@ -9,7 +9,12 @@ input.valid[type=text]:not(.browser-default) {
     -webkit-box-shadow: 0 1px 0 0 #b388ff !important;
     box-shadow: 0 1px 0 0 #b388ff !important;
 }
-
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #b388ff !important;
+}
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #8c49ff !important;
+}
 /* canvas{ border: 1px solid gray; } */
 
 .progress {
