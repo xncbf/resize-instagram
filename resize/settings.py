@@ -153,10 +153,10 @@ PWA_APP_ICONS_APPLE = [
     }
 ]
 PWA_APP_SPLASH_SCREEN = [
-    {
-        'src': STATIC_URL + 'resize-instagram2.png', # 640x1136
-        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
-    }
+    # {
+    #     'src': STATIC_URL + 'resize-instagram2.png', # 640x1136
+    #     'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    # }
 ]
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'en-US'
