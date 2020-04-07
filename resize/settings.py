@@ -132,11 +132,6 @@ STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 AWS_S3_BUCKET_NAME_MEDIA = "resize-media"
 
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
-
 PWA_APP_NAME = 'Resize'
 PWA_APP_DESCRIPTION = "Resize Instagram"
 PWA_APP_THEME_COLOR = '#de91ff'
