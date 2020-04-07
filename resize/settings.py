@@ -24,7 +24,7 @@ SECRET_KEY = '(1zy%vixzm%hq4%5r@uwyvgzz8^6fa#5u^r93cvz9@vr1*-2*0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*' if DEBUG else 'resize-instagram.com']
 
 
 # Application definition
@@ -132,9 +132,10 @@ STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 AWS_S3_BUCKET_NAME_MEDIA = "resize-media"
 
-# STATICFILES_DIRS = [
-#     STATIC_URL,
-# ]
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
 
 PWA_APP_NAME = 'Resize'
 PWA_APP_DESCRIPTION = "Resize Instagram"
@@ -146,19 +147,19 @@ PWA_APP_ORIENTATION = 'any'
 PWA_APP_START_URL = '/'
 PWA_APP_ICONS = [
     {
-        'src': STATIC_URL + 'icon.png',
+        'src': STATIC_URL + 'icon-160x160.png',
         'sizes': '160x160'
     }
 ]
 PWA_APP_ICONS_APPLE = [
     {
-        'src': STATIC_URL + 'icon.png',
+        'src': STATIC_URL + 'icon-160x160.png',
         'sizes': '160x160'
     }
 ]
 PWA_APP_SPLASH_SCREEN = [
     {
-        'src': STATIC_URL + 'icon.png', # 640x1136
+        'src': STATIC_URL + 'resize-instagram2.png', # 640x1136
         'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
     }
 ]
