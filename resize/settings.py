@@ -166,3 +166,4 @@ PWA_APP_SPLASH_SCREEN = [
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'en-US'
 PWA_APP_DEBUG_MODE = DEBUG
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'app', 'serviceworker.js')
