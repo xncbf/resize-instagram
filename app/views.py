@@ -71,7 +71,7 @@ def upload_image(img, file_name, s3_file_path):
 
 def upload_white_space_image(img, ratio):
     content_type = img.content_type.split('/')[1]
-    img = Image.open(img)
+    img = Image.open(img).convert("RGBA")
     timestamp = int(datetime.datetime.now().timestamp()*1000000)
     file_name = f'{timestamp}.{content_type}'
     today = date.today()
