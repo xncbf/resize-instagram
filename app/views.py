@@ -69,8 +69,9 @@ def upload_image(img, image_name, file_name, s3_file_path):
     # upload thumbnail image
     async_upload_file('/tmp/th_' + file_name, object_name='thumbnail/'+file_name)
 
-def upload_white_space_image(img, ratio):
-    return get_white_square(img, ratio)
+def upload_white_space_image(img, ratio, image_name, file_name, s3_file_path):
+    img = get_white_square(img, ratio)
+    upload_image(img, image_name, file_name, s3_file_path)
     
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -83,14 +84,10 @@ class IndexView(TemplateView):
             image_name = img.name
             content_type = img.content_type.split('/')[1]
             img = Image.open(img)
-            img = upload_white_space_image(img, ratio)
-            
             timestamp = int(datetime.datetime.now().timestamp()*1000000)
             file_name = f'{timestamp}.{content_type}'
-
             today = date.today()
             s3_file_path=f'{today.year}/{today.month}/{today.day}/'
-
-            upload_image(img, image_name, file_name, s3_file_path)
+            upload_white_space_image(img, ratio, image_name, file_name, s3_file_path)
             results.append(s3_file_path+file_name)
         return JsonResponse(results, status=201, safe=False)
