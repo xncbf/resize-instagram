@@ -49,7 +49,7 @@ def get_white_square(img, ratio):
         else:
             size = (int(img.size[1]/4*5), img.size[1])
     layer = Image.new('RGB', size, (255,255,255))
-    layer.paste(img, tuple(map(lambda x:(x[0]-x[1])//2, zip(size, img.size))))
+    layer.paste(img, tuple(map(lambda x:(x[0]-x[1])//2, zip(size, img.size))), img)
     return layer
 
 def upload_image(img, image_name, file_name, s3_file_path):
