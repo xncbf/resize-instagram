@@ -71,6 +71,7 @@ def upload_image(img, file_name, s3_file_path):
 
 def upload_white_space_image(img, ratio):
     content_type = img.content_type.split('/')[1]
+    img = Image.open(img)
     timestamp = int(datetime.datetime.now().timestamp()*1000000)
     file_name = f'{timestamp}.{content_type}'
     today = date.today()
@@ -87,7 +88,6 @@ class IndexView(TemplateView):
         ratio = request.POST['ratio']
         results = []
         for img in imgs:
-            img = Image.open(img)
             result = upload_white_space_image(img, ratio)
             results.append(result)
         return JsonResponse(results, status=201, safe=False)
