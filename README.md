@@ -15,7 +15,7 @@
 
 | original |      1:1      |  4:5  |  5:5  |
 |----------|:-------------:|------:|------:|
-| TODO |  TODO | TODO | TODO |
+| ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/origin.png) |  ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/1x1.png) | ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/4x5.png) | ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/5x4.png) |
 
 # Progressive web app (PWA)
 
