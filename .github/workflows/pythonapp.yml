@@ -31,7 +31,6 @@ jobs:
     #   env:
     #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
     #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #       AWS_REGION: "ap-northeast-2"
     #   run: |
     #     pipenv run zappa certify dev --yes
     - name: deployment
@@ -39,4 +38,25 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        pipenv run zappa update dev_ap_northeast_1
+        pipenv run zappa deploy dev_ap_east_1
+        pipenv run zappa deploy dev_ap_northeast_1
+        
+        pipenv run zappa deploy dev_ap_northeast_3
+        pipenv run zappa deploy dev_ap_south_1
+        pipenv run zappa deploy dev_ap_southeast_1
+        pipenv run zappa deploy dev_ap_southeast_2
+        pipenv run zappa deploy dev_ca_central_1
+        pipenv run zappa deploy dev_cn_north_1
+        pipenv run zappa deploy dev_cn_northwest_1
+        pipenv run zappa deploy dev_eu_central_1
+        pipenv run zappa deploy dev_eu_north_1
+        pipenv run zappa deploy dev_eu_west_1
+        pipenv run zappa deploy dev_eu_west_2
+        pipenv run zappa deploy dev_eu_west_3
+        pipenv run zappa deploy dev_sa_east_1
+        pipenv run zappa deploy dev_us_east_1
+        pipenv run zappa deploy dev_us_east_2
+        pipenv run zappa deploy dev_us_gov_east_1
+        pipenv run zappa deploy dev_us_gov_west_1
+        pipenv run zappa deploy dev_us_west_1
+        pipenv run zappa deploy dev_us_west_2
