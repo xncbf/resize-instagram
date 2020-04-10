@@ -1,6 +1,6 @@
 {
     "dev": { 
-        "aws_region": "ap-northeast-2",
+        // "aws_region": "ap-northeast-2",
         "django_settings": "resize.settings",
         "project_name": "resize",
         "runtime": "python3.7",
