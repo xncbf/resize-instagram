@@ -40,7 +40,7 @@ jobs:
       run: |
         pipenv run zappa deploy dev_ap_east_1
         pipenv run zappa deploy dev_ap_northeast_1
-        
+
         pipenv run zappa deploy dev_ap_northeast_3
         pipenv run zappa deploy dev_ap_south_1
         pipenv run zappa deploy dev_ap_southeast_1
