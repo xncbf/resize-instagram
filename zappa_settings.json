@@ -40,11 +40,6 @@
         "aws_region": "eu-central-1",
         "extends": "dev"
     },
-    "dev_eu_north_1": {
-        "s3_bucket": "zappa-resize-k",
-        "aws_region": "eu-north-1",
-        "extends": "dev"
-    },
     "dev_eu_west_1": {
         "s3_bucket": "zappa-resize-l",
         "aws_region": "eu-west-1",
