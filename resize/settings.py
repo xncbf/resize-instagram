@@ -75,16 +75,16 @@ WSGI_APPLICATION = 'resize.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'resize',
-        'USER': os.getenv('R_DB_USER'),
-        'PASSWORD': os.getenv('R_DB_PASSWORD'),
-        'HOST': os.getenv('R_DB_HOST'),
-        'PORT': os.getenv('R_DB_PORT')
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'resize',
+#         'USER': os.getenv('R_DB_USER'),
+#         'PASSWORD': os.getenv('R_DB_PASSWORD'),
+#         'HOST': os.getenv('R_DB_HOST'),
+#         'PORT': os.getenv('R_DB_PORT')
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
