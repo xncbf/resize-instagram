@@ -12,6 +12,7 @@
         "certificate_arn": "arn:aws:acm:us-east-1:494890851710:certificate/ce57df7b-b79c-405d-ba92-9c3d9df74e69"
     },
     "dev_ap_east_1": {
+        // hongkong
         "aws_region": "ap-east-1",
         "extends": "dev"
     },

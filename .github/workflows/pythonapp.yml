@@ -38,7 +38,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        pipenv run zappa deploy dev_ap_east_1
         pipenv run zappa deploy dev_ap_northeast_1
 
         pipenv run zappa deploy dev_ap_northeast_3
