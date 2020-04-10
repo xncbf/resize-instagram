@@ -39,11 +39,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         pipenv run zappa update dev_ap_northeast_1
-        pipenv run zappa deploy dev_ap_northeast_2
+        pipenv run zappa update dev_ap_northeast_2
         pipenv run zappa update dev_ap_south_1
         pipenv run zappa update dev_ap_southeast_1
         pipenv run zappa update dev_ap_southeast_2
-        pipenv run zappa deploy dev_cn_north_1
         pipenv run zappa deploy dev_eu_central_1
         pipenv run zappa deploy dev_eu_north_1
         pipenv run zappa deploy dev_eu_west_1

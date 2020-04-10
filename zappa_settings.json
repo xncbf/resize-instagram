@@ -35,11 +35,6 @@
         "aws_region": "ap-southeast-2",
         "extends": "dev"
     },
-    "dev_cn_north_1": {
-        "s3_bucket": "zappa-resize-h",
-        "aws_region": "cn-north-1",
-        "extends": "dev"
-    },
     "dev_eu_central_1": {
         "s3_bucket": "zappa-resize-j",
         "aws_region": "eu-central-1",
