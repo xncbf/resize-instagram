@@ -10,11 +10,6 @@
         "domain": "resize-instagram.com",
         "certificate_arn": "arn:aws:acm:us-east-1:494890851710:certificate/ce57df7b-b79c-405d-ba92-9c3d9df74e69"
     },
-    "dev_ap_east_1": {
-        // hongkong
-        "aws_region": "ap-east-1",
-        "extends": "dev"
-    },
     "dev_ap_northeast_1": {
         "s3_bucket": "zappa-resize-a",
         "aws_region": "ap-northeast-1",
@@ -23,11 +18,6 @@
     "dev_ap_northeast_2": {
         "s3_bucket": "zappa-resize-b",
         "aws_region": "ap-northeast-2",
-        "extends": "dev"
-    },
-    "dev_ap_northeast_3": {
-        "s3_bucket": "zappa-resize-c",
-        "aws_region": "ap-northeast-3",
         "extends": "dev"
     },
     "dev_ap_south_1": {
@@ -53,11 +43,6 @@
     "dev_cn_north_1": {
         "s3_bucket": "zappa-resize-h",
         "aws_region": "cn-north-1",
-        "extends": "dev"
-    },
-    "dev_cn_northwest_1": {
-        "s3_bucket": "zappa-resize-i",
-        "aws_region": "cn-northwest-1",
         "extends": "dev"
     },
     "dev_eu_central_1": {
@@ -98,16 +83,6 @@
     "dev_us_east_2": {
         "s3_bucket": "zappa-resize-q",
         "aws_region": "us-east-2",
-        "extends": "dev"
-    },
-    "dev_us_gov_east_1": {
-        "s3_bucket": "zappa-resize-r",
-        "aws_region": "us-gov-east-1",
-        "extends": "dev"
-    },
-    "dev_us_gov_west_1": {
-        "s3_bucket": "zappa-resize-s",
-        "aws_region": "us-gov-west-1",
         "extends": "dev"
     },
     "dev_us_west_1": {
