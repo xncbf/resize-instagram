@@ -106,7 +106,7 @@
                                 let res = JSON.parse(xhr.response)
                                 for(let i=0;i<res.length;i++){
                                     let e = document.getElementsByClassName('progress-download')[0];
-                                    e.parentElement.setAttribute('href', `https://resize-media.s3.ap-northeast-2.amazonaws.com/${res[i]}`);
+                                    e.parentElement.setAttribute('href', `https://resize-media.s3.amazonaws.com/${res[i]}`);
                                     e.outerHTML = `${res[i].split('/')[3]}`;
                                     // [].forEach.call(document.querySelectorAll('.progress'), function (el) {
                                     //     el.style.visibility = 'hidden';
@@ -116,7 +116,7 @@
                                     // M.toast({html: HTML, displayLength:4000});
                                     // HTML = `<a 
                                     //     download="custom-filename.jpg"
-                                    //     href="https://resize-media.s3.ap-northeast-2.amazonaws.com/${res[i]}"
+                                    //     href="https://resize-media.s3.amazonaws.com/${res[i]}"
                                     //     class="collection-item">
                                     //     ${res[i].split('/')[3]}
                                     // </a>`;
