@@ -1,6 +1,6 @@
 {
     "dev": {
-        "aws_region": "ap-northeast-2",
+        // "aws_region": "ap-northeast-2",
         "django_settings": "resize.settings",
         "project_name": "resize",
         "runtime": "python3.7",
@@ -10,5 +10,93 @@
         // "async_resources": true,
         "domain": "resize-instagram.com",
         "certificate_arn": "arn:aws:acm:us-east-1:494890851710:certificate/ce57df7b-b79c-405d-ba92-9c3d9df74e69"
+    },
+    "dev_ap_east_1": {
+        "aws_region": "ap-east-1",
+        "extends": "dev"
+    },
+    "dev_ap_northeast_1": {
+        "aws_region": "ap-northeast-1",
+        "extends": "dev"
+    },
+    "dev_ap_northeast_2": {
+        "aws_region": "ap-northeast-2",
+        "extends": "dev"
+    },
+    "dev_ap_northeast_3": {
+        "aws_region": "ap-northeast-3",
+        "extends": "dev"
+    },
+    "dev_ap_south_1": {
+        "aws_region": "ap-south-1",
+        "extends": "dev"
+    },
+    "dev_ap_southeast_1": {
+        "aws_region": "ap-southeast-1",
+        "extends": "dev"
+    },
+    "dev_ap_southeast_2": {
+        "aws_region": "ap-southeast-2",
+        "extends": "dev"
+    },
+    "dev_ca_central_1": {
+        "aws_region": "ca-central-1",
+        "extends": "dev"
+    },
+    "dev_cn_north_1": {
+        "aws_region": "cn-north-1",
+        "extends": "dev"
+    },
+    "dev_cn_northwest_1": {
+        "aws_region": "cn-northwest-1",
+        "extends": "dev"
+    },
+    "dev_eu_central_1": {
+        "aws_region": "eu-central-1",
+        "extends": "dev"
+    },
+    "dev_eu_north_1": {
+        "aws_region": "eu-north-1",
+        "extends": "dev"
+    },
+    "dev_eu_west_1": {
+        "aws_region": "eu-west-1",
+        "extends": "dev"
+    },
+    "dev_eu_west_2": {
+        "aws_region": "eu-west-2",
+        "extends": "dev"
+    },
+    "dev_eu_west_3": {
+        "aws_region": "eu-west-3",
+        "extends": "dev"
+    },
+    "dev_sa_east_1": {
+        "aws_region": "sa-east-1",
+        "extends": "dev"
+    },
+    "dev_us_east_1": {
+        "aws_region": "us-east-1",
+        "extends": "dev"
+    },
+    "dev_us_east_2": {
+        "aws_region": "us-east-2",
+        "extends": "dev"
+    },
+    "dev_us_gov_east_1": {
+        "aws_region": "us-gov-east-1",
+        "extends": "dev"
+    },
+    "dev_us_gov_west_1": {
+        "aws_region": "us-gov-west-1",
+        "extends": "dev"
+    },
+    "dev_us_west_1": {
+        "aws_region": "us-west-1",
+        "extends": "dev"
+    },
+    "dev_us_west_2": {
+        "aws_region": "us-west-2",
+        "extends": "dev"
     }
 }
