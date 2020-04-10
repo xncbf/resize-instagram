@@ -45,11 +45,11 @@ jobs:
         # pipenv run zappa update dev_ap_southeast_1
         # pipenv run zappa update dev_ap_southeast_2
         # pipenv run zappa update dev_eu_central_1
-        # pipenv run zappa deploy dev_eu_west_1
-        # pipenv run zappa deploy dev_eu_west_2
-        # pipenv run zappa deploy dev_eu_west_3
-        # pipenv run zappa deploy dev_sa_east_1
-        # pipenv run zappa deploy dev_us_east_1
-        pipenv run zappa deploy dev_us_east_2
+        # pipenv run zappa update dev_eu_west_1
+        # pipenv run zappa update dev_eu_west_2
+        # pipenv run zappa update dev_eu_west_3
+        # pipenv run zappa update dev_sa_east_1
+        # pipenv run zappa update dev_us_east_1
+        # pipenv run zappa update dev_us_east_2
         pipenv run zappa deploy dev_us_west_1
         pipenv run zappa deploy dev_us_west_2
