@@ -96,10 +96,7 @@
                         width: 800, // maximum width
                         height: 800 // maximum height
                     }, function(blob, didItResize) {
-                        // fd.append('images', input.files[i])
                         fd.set('images', blob)
-                        // document.getElementById('preview').src = window.URL.createObjectURL(blob);
-                        
                         fd.append("ratio", ratio);
 
                         let xhr = new XMLHttpRequest();
@@ -108,21 +105,22 @@
                             if (xhr.readyState === 4) {
                                 let res = JSON.parse(xhr.response)
                                 for(let i=0;i<res.length;i++){
-                                    [].forEach.call(document.querySelectorAll('.progress'), function (el) {
-                                        el.style.visibility = 'hidden';
-                                    });
-                                    document.getElementById('btn').removeAttribute("disabled");
-                                    let HTML = `<span>Done!</span>`;
-                                    M.toast({html: HTML, displayLength:4000});
-                                    HTML = `<a 
-                                        download="custom-filename.jpg"
-                                        href="https://resize-media.s3.ap-northeast-2.amazonaws.com/${res[i]}"
-                                        title="ImageName"
-                                        class="collection-item">
-                                        ${res[i].split('/')[3]}
-                                    </a>`;
-                                    document.getElementsByClassName('collection')[0].innerHTML += HTML
-                                    
+                                    let e = document.getElementsByClassName('progress-download')[0];
+                                    e.outerHTML = `${res[i].split('/')[3]}`;
+                                    e.parentElement.setAttribute('href', `https://resize-media.s3.ap-northeast-2.amazonaws.com/${res[i]}`);
+                                    // [].forEach.call(document.querySelectorAll('.progress'), function (el) {
+                                    //     el.style.visibility = 'hidden';
+                                    // });
+                                    // document.getElementById('btn').removeAttribute("disabled");
+                                    // let HTML = `<span>Done!</span>`;
+                                    // M.toast({html: HTML, displayLength:4000});
+                                    // HTML = `<a 
+                                    //     download="custom-filename.jpg"
+                                    //     href="https://resize-media.s3.ap-northeast-2.amazonaws.com/${res[i]}"
+                                    //     class="collection-item">
+                                    //     ${res[i].split('/')[3]}
+                                    // </a>`;
+                                    // document.getElementsByClassName('collection')[0].innerHTML += HTML
                                 }
                             }
                         }
@@ -130,10 +128,17 @@
                         xhr.setRequestHeader("X-CSRFToken", csrftoken);
                         xhr.send(fd);            
                         document.getElementById('btn').setAttribute("disabled", true);
-                        [].forEach.call(document.querySelectorAll('.progress'), function (el) {
-                            el.style.visibility = '';
-                        });
+                        // [].forEach.call(document.querySelectorAll('.progress'), function (el) {
+                        //     el.style.visibility = '';
+                        // });
                 });
+
+                HTML = `<a download="custom-filename.jpg" class="collection-item">
+                    <div class="progress progress-download">
+                        <div class="indeterminate"></div>
+                    </div>
+                </a>`;
+                document.getElementsByClassName('collection')[0].innerHTML += HTML
                 
             }
             
