@@ -5,7 +5,7 @@
         "project_name": "resize",
         "runtime": "python3.7",
         // "profile": "zappa",
-        "s3_bucket": "zappa-8w5k7sdak",
+        "s3_bucket": "zappa-sda8w5k7k",
         // "async_source": "sns",
         // "async_resources": true,
         "domain": "resize-instagram.com",
