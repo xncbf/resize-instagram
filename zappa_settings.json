@@ -1,58 +1,14 @@
 {
     "dev": { 
-        // "aws_region": "ap-northeast-2",
+        "aws_region": "us-east-1",
         "django_settings": "resize.settings",
         "project_name": "resize",
         "runtime": "python3.7",
         // "profile": "zappa",
         // "async_source": "sns",
         // "async_resources": true,
+        "s3_bucket": "zappa",
         "domain": "resize-instagram.com",
         "certificate_arn": "arn:aws:acm:us-east-1:494890851710:certificate/ce57df7b-b79c-405d-ba92-9c3d9df74e69"
-    },
-    "dev_eu_central_1": {
-        "s3_bucket": "zappa-resize-j",
-        "aws_region": "eu-central-1",
-        "extends": "dev"
-    },
-    "dev_eu_west_1": {
-        "s3_bucket": "zappa-resize-l",
-        "aws_region": "eu-west-1",
-        "extends": "dev"
-    },
-    "dev_eu_west_2": {
-        "s3_bucket": "zappa-resize-m",
-        "aws_region": "eu-west-2",
-        "extends": "dev"
-    },
-    "dev_eu_west_3": {
-        "s3_bucket": "zappa-resize-n",
-        "aws_region": "eu-west-3",
-        "extends": "dev"
-    },
-    "dev_sa_east_1": {
-        "s3_bucket": "zappa-resize-o",
-        "aws_region": "sa-east-1",
-        "extends": "dev"
-    },
-    "dev_us_east_1": {
-        "s3_bucket": "zappa-resize-p",
-        "aws_region": "us-east-1",
-        "extends": "dev"
-    },
-    "dev_us_east_2": {
-        "s3_bucket": "zappa-resize-q",
-        "aws_region": "us-east-2",
-        "extends": "dev"
-    },
-    "dev_us_west_1": {
-        "s3_bucket": "zappa-resize-t",
-        "aws_region": "us-west-1",
-        "extends": "dev"
-    },
-    "dev_us_west_2": {
-        "s3_bucket": "zappa-resize-u",
-        "aws_region": "us-west-2",
-        "extends": "dev"
     }
 }

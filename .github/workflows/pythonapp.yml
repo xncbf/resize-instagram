@@ -33,27 +33,11 @@ jobs:
     #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
     #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     #   run: |
-    #     # pipenv run zappa certify dev --yes
-    #     pipenv run zappa certify dev_eu_central_1 --yes
-    #     pipenv run zappa certify dev_eu_west_1 --yes
-    #     pipenv run zappa certify dev_eu_west_2 --yes
-    #     pipenv run zappa certify dev_eu_west_3 --yes
-    #     pipenv run zappa certify dev_sa_east_1 --yes
-    #     pipenv run zappa certify dev_us_east_1 --yes
-    #     pipenv run zappa certify dev_us_east_2 --yes
-    #     pipenv run zappa certify dev_us_west_1 --yes
-    #     pipenv run zappa certify dev_us_west_2 --yes
+    #     pipenv run zappa certify dev --yes
+
     - name: deployment
       env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        pipenv run zappa undeploy dev_eu_central_1 --yes
-        pipenv run zappa undeploy dev_eu_west_1 --yes
-        pipenv run zappa undeploy dev_eu_west_2 --yes
-        pipenv run zappa undeploy dev_eu_west_3 --yes
-        pipenv run zappa undeploy dev_sa_east_1 --yes
-        pipenv run zappa undeploy dev_us_east_1 --yes
-        pipenv run zappa undeploy dev_us_east_2 --yes
-        pipenv run zappa undeploy dev_us_west_1 --yes
-        pipenv run zappa undeploy dev_us_west_2 --yes
+        pipenv run zappa deploy dev --yes
