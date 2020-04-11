@@ -104,12 +104,11 @@
                         xhr.onreadystatechange = function() {
                             if (xhr.readyState === 4) {
                                 let res = JSON.parse(xhr.response)
-                                let e = document.getElementsByClassName('progress-download')[0];
-                                e.parentElement.setAttribute('href', `https://resize-media.s3.amazonaws.com/${res[0]}`);
-                                e.outerHTML = `${res[i].split('/')[3]}`;
-                            } else {
-                                let e = document.getElementsByClassName('progress-download')[0];
-                                e.outerHTML = 'failed';
+                                if (res.length > 0){
+                                    let e = document.getElementsByClassName('progress-download')[0];
+                                    e.parentElement.setAttribute('href', `https://resize-media.s3.amazonaws.com/${res[0]}`);
+                                    e.outerHTML = `${res[i].split('/')[3]}`;
+                                }
                             }
                             
                             document.getElementById('btn').removeAttribute("disabled");
