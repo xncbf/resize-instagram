@@ -1,13 +1,13 @@
 {
     "dev": { 
-        "aws_region": "us-east-1",
+        "aws_region": "us-west-1",
         "django_settings": "resize.settings",
         "project_name": "resize",
         "runtime": "python3.7",
         // "profile": "zappa",
         // "async_source": "sns",
         // "async_resources": true,
-        "s3_bucket": "zappa",
+        "s3_bucket": "zappa-upload",
         "domain": "resize-instagram.com",
         "certificate_arn": "arn:aws:acm:us-east-1:494890851710:certificate/ce57df7b-b79c-405d-ba92-9c3d9df74e69"
     }
