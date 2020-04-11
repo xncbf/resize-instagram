@@ -10,31 +10,6 @@
         "domain": "resize-instagram.com",
         "certificate_arn": "arn:aws:acm:us-east-1:494890851710:certificate/ce57df7b-b79c-405d-ba92-9c3d9df74e69"
     },
-    "dev_ap_northeast_1": {
-        "s3_bucket": "zappa-resize-a",
-        "aws_region": "ap-northeast-1",
-        "extends": "dev"
-    },
-    "dev_ap_northeast_2": {
-        "s3_bucket": "zappa-resize-b",
-        "aws_region": "ap-northeast-2",
-        "extends": "dev"
-    },
-    "dev_ap_south_1": {
-        "s3_bucket": "zappa-resize-d",
-        "aws_region": "ap-south-1",
-        "extends": "dev"
-    },
-    "dev_ap_southeast_1": {
-        "s3_bucket": "zappa-resize-e",
-        "aws_region": "ap-southeast-1",
-        "extends": "dev"
-    },
-    "dev_ap_southeast_2": {
-        "s3_bucket": "zappa-resize-f",
-        "aws_region": "ap-southeast-2",
-        "extends": "dev"
-    },
     "dev_eu_central_1": {
         "s3_bucket": "zappa-resize-j",
         "aws_region": "eu-central-1",
