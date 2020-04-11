@@ -109,7 +109,7 @@
                                     e.parentElement.setAttribute('href', `https://resize-media.s3.amazonaws.com/${res[0]}`);
                                     e.outerHTML = `${res[i].split('/')[3]}`;
                                 } else {
-                                    e.outerHTML = `Failed`;
+                                    e.outerHTML = `Failed: Image size too large`;
                                 }
                             }
                             
