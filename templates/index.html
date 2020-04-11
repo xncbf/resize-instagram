@@ -28,8 +28,7 @@
                     });
                 }
             };
-
-            document.getElementById('imgfile').onchange = function(evt) {
+            function imageEventHandler(evt){
                 let input, file, fr, img;
                 input = document.getElementById('imgfile');
                 file = input.files[0];
@@ -43,53 +42,40 @@
                     img.src = fr.result;
                 }
 
-                function getXY(element){
-                    const MAX_WIDTH = element.parentElement.offsetWidth-50;
-                    const MAX_HEIGHT = MAX_WIDTH;
-
-                    let width = img.width;
-                    let height = img.height;
-
-                    if (width > height) {
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
-                    } else {
-                        if (height > MAX_HEIGHT) {
-                            width *= MAX_HEIGHT / height;
-                            height = MAX_HEIGHT;
-
-                        }
-                    }
-                    return [width, height]
-                }
-
                 function imageLoaded() {
                     let canvas = document.getElementById("canvas");
-                    const [width, height] = getXY(canvas);
+                    let [canvas_x, canvas_y] = getXY(canvas, img);
+                    
+                    const radio = document.getElementsByName('group1');
+                    let ratio = getRadioValue(radio);
+
+                    let [width, height] = getCanvasSize(canvas_x, canvas_y, ratio);
                     canvas.width = width;
                     canvas.height = height;
+                    let [x, y] = getImagePosition(canvas, canvas_x, canvas_y);
                     let ctx = canvas.getContext("2d");
-                    ctx.drawImage(img,0,0, width, height);
+                    ctx.fillStyle = "#FFF";
+                    ctx.fillRect(0, 0, width, height);
+                    ctx.drawImage(img, x, y, canvas_x, canvas_y);
                     // let dataurl = canvas.toDataURL("image/png");
                 }
 
                 window.addEventListener("resize", imageLoaded);
             };
+
+            document.getElementById('imgfile').onchange = imageEventHandler;
+            let radios = document.getElementsByName('group1');
+            for(var i = 0;i < radios.length;i++){
+                radios[i].onchange = imageEventHandler;
+            }
         });
+
         function sendForm(obj){
             let fd = new FormData();
             input = document.getElementById('imgfile');
             if(!input.value){ return };
             const radio = document.getElementsByName('group1');
-            let ratio;
-            for(let i=0;i<radio.length;i++){
-                if (radio[i].checked){
-                    ratio = radio[i].value
-                    break;
-                }
-            };
+            let ratio = getRadioValue(radio);
             for (let i = 0; i < input.files.length; i++) {
                 // 10485760 
                 ImageTools.resize(input.files[i], {
@@ -196,12 +182,12 @@
                 <span>5:4</span>
               </label>
             </p>
-            <p>
+            <!-- <p>
               <label>
                 <input class="with-gap" name="group1" type="radio" disabled/>
                 <span>Automatically update more</span>
               </label>
-            </p>
+            </p> -->
         </form>
         <a class="waves-effect waves-light btn deep-purple accent-1"
             href="javascript:void(0);" onClick="sendForm();" id='btn'>Download Resized</a>
