@@ -76,6 +76,7 @@
             if(!input.value){ return };
             const radio = document.getElementsByName('group1');
             let ratio = getRadioValue(radio);
+            document.getElementById('btn').setAttribute("disabled", true);
             for (let i = 0; i < input.files.length; i++) {
                 // 10485760 
                 ImageTools.resize(input.files[i], {
@@ -98,13 +99,12 @@
                                     e.outerHTML = `Failed: Image size too large. can't upload upper than 10mb`;
                                 }
                             }
-                            
                             document.getElementById('btn').removeAttribute("disabled");
                         }
                         xhr.open("POST", "{% url 'index' %}");
                         xhr.setRequestHeader("X-CSRFToken", csrftoken);
                         xhr.send(fd);            
-                        document.getElementById('btn').setAttribute("disabled", true);
+                        
                         // [].forEach.call(document.querySelectorAll('.progress'), function (el) {
                         //     el.style.visibility = '';
                         // });
