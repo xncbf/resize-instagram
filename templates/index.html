@@ -107,7 +107,7 @@
                                 if (xhr.status===201){
                                     let res = JSON.parse(xhr.response)                                    
                                     e.parentElement.setAttribute('href', `https://resize-media.s3.amazonaws.com/${res[0]}`);
-                                    e.outerHTML = `${res[i].split('/')[3]}`;
+                                    e.outerHTML = `${res[0].split('/')[3]}`;
                                 } else {
                                     e.outerHTML = `Failed: Image size too large. can't upload upper than 10mb`;
                                 }
