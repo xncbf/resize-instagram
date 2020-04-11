@@ -64,8 +64,8 @@ class ImageTools {
                 height = maxDimensions.height;
                 isTooLarge = true;
             }
-
-            if (!isTooLarge) {
+            
+            if (!isTooLarge && file.size < 10485760) {
                 // early exit; no need to resize
                 callback(file, false);
                 return;

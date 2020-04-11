@@ -91,7 +91,7 @@
                 }
             };
             for (let i = 0; i < input.files.length; i++) {
-                
+                // 10485760 
                 ImageTools.resize(input.files[i], {
                         width: 800, // maximum width
                         height: 800 // maximum height
@@ -103,9 +103,9 @@
 
                         xhr.onreadystatechange = function() {
                             if (xhr.readyState === 4) {
-                                let res = JSON.parse(xhr.response)
                                 let e = document.getElementsByClassName('progress-download')[0];
-                                if (res.length > 0){
+                                if (xhr.status===201){
+                                    let res = JSON.parse(xhr.response)                                    
                                     e.parentElement.setAttribute('href', `https://resize-media.s3.amazonaws.com/${res[0]}`);
                                     e.outerHTML = `${res[i].split('/')[3]}`;
                                 } else {
