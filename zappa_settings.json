@@ -8,7 +8,7 @@
         // "async_source": "sns",
         // "async_resources": true,
         "s3_bucket": "zappa-upload-bucket1",
-        "domain": "resize-instagram.com",
+        "domain": "resiz.io",
         "certificate_arn": "arn:aws:acm:us-east-1:494890851710:certificate/ce57df7b-b79c-405d-ba92-9c3d9df74e69"
     }
 }
