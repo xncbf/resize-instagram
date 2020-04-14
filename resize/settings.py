@@ -19,12 +19,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(1zy%vixzm%hq4%5r@uwyvgzz8^6fa#5u^r93cvz9@vr1*-2*0'
+SECRET_KEY = os.getenv('RESIZE_SECRET_KEY', '(1zy%vixzm%hq4%5r@uwyvgzz8^6fa#5u^r93cvz9@vr1*-2*0')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*' if DEBUG else 'resize-instagram.com']
+ALLOWED_HOSTS = ['*' if DEBUG else 'resiz.io']
 
 
 # Application definition

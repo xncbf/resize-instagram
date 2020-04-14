@@ -1,9 +1,9 @@
 ![deployment](https://github.com/xncbf/resize-instagram/workflows/deployment%20to%20master/badge.svg)
 
 # resize-instagram
-resize instagram photo online without cropping
+resize for instagram photo online without cropping
 
-[![resize instagram](https://github.com/xncbf/resize-instagram/blob/master/app/static/resize-instagram.png)](https://resize-instagram.com/)
+[![resize instagram](https://github.com/xncbf/resize-instagram/blob/master/app/static/resize-instagram.png)](https://resiz.io/)
 
 # Usage:sunglasses:
 
