@@ -80,8 +80,8 @@
             for (let i = 0; i < input.files.length; i++) {
                 // 10485760 
                 ImageTools.resize(input.files[i], {
-                        width: 800, // maximum width
-                        height: 800 // maximum height
+                        width: 3600, // maximum width
+                        height: 3600 // maximum height
                     }, function(blob, didItResize) {
                         fd.set('images', blob)
                         fd.append("ratio", ratio);
