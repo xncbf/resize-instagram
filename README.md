@@ -13,6 +13,7 @@ resize for instagram photo online without cropping
  4. Enjoy!:clap::clap::clap:
 
 # Output
+>  It is expressed on a gray background to help understanding, but in fact it is expressed in white.
 
 | original |      1:1      |  4:5  |  5:5  |
 |----------|:-------------:|------:|------:|
