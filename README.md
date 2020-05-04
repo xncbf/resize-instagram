@@ -21,7 +21,8 @@ resize for instagram photo online without cropping
 
 # Progressive web app (PWA)
 
-TODO
+You can install PWA to make it act like a real native app.
 
 # Contribute
 
+Please submit a PR for better functionality
