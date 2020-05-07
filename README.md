@@ -15,7 +15,7 @@ resize for instagram photo online without cropping
 # Output
 >  It is expressed on a gray background to help understanding, but in fact it is expressed in white.
 
-| original |      1:1      |  4:5  |  5:5  |
+| original |      1:1      |  4:5  |  5:4  |
 |----------|:-------------:|------:|------:|
 | ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/origin.png) |  ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/1x1.png) | ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/4x5.png) | ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/5x4.png) |
 
