@@ -1,4 +1,4 @@
-Django==3.0.7
+Django==3.0.14
 django-pwa==1.0.8
 django-s3-storage==0.13.0
 Pillow==7.0.0
