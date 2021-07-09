@@ -3,4 +3,4 @@ django-pwa==1.0.8
 django-s3-storage==0.13.0
 Pillow==7.0.0
 psycopg2-binary==2.8.3
-zappa
+zappa==0.52.0
