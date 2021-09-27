@@ -1,21 +1,89 @@
+import os
 import boto3
+import copy
+import datetime
+import logging
+import io
 import os
 
+from datetime import date
 
-from resize.settings import AWS_S3_BUCKET_NAME_MEDIA
+from PIL import Image
 
-def async_upload_file(file_name, bucket=AWS_S3_BUCKET_NAME_MEDIA, object_name=None):
+from app.settings import AWS_S3_BUCKET_NAME_MEDIA
+from app.utils import upload_file
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+RATIO_TUPLE = (
+    (1, '1:1'),
+    (2, '4:5'),
+    (3, '5:4')
+)
+
+async def image_to_byte_array(image:Image):
+  imgByteArr = io.BytesIO()
+  image.save(imgByteArr, format='PNG')
+  imgByteArr = imgByteArr.getvalue()
+  return imgByteArr
+
+
+async def get_white_square(img, ratio):
+    # img.thumbnail((800,800), Image.ANTIALIAS)
+    max_size = max(img.size)
+    """return a white-background-color image having the img in ratio"""
+    if ratio == '1':
+        # 1:1
+        size = (max_size, )*2
+    elif ratio == '2':
+        # 4:5
+        if int(img.size[0]/4*5) > img.size[1]:
+            size = (img.size[0], int(img.size[0]/4*5))
+        else:
+            size = (int(img.size[1]/5*4), img.size[1])
+    elif ratio == '3':
+        # 5:4
+        if int(img.size[0]/5*4) > img.size[1]:
+            size = (img.size[0], int(img.size[0]/5*4))
+        else:
+            size = (int(img.size[1]/4*5), img.size[1])
+    layer = Image.new('RGB', size, (255,255,255))
+    layer.paste(img, tuple(map(lambda x:(x[0]-x[1])//2, zip(size, img.size))), img)
+    return layer
+
+async def upload_image(img, file_name, s3_file_path):
+    # stream byte
+    # byte_img = image_to_byte_array(img)
+    # img.thumbnail((128,128), Image.ANTIALIAS)
+    # byte_th_img = image_to_byte_array(img)
+    # save file
+    th = copy.deepcopy(img)
+    th.thumbnail((128,128), Image.ANTIALIAS)
+    img.save('/tmp/'+file_name)
+    img.thumbnail((128,128), Image.ANTIALIAS)
+    img.save('/tmp/th_' + file_name)
+    # upload origin image
+    upload_file('/tmp/'+file_name, object_name=s3_file_path+file_name)
+    
+    # upload thumbnail image
+    upload_file('/tmp/th_' + file_name, object_name='thumbnail/'+file_name)
+
+async def upload_white_space_image(img, ratio):
+    content_type = img.content_type.split('/')[1]
+    img = Image.open(img).convert("RGBA")
+    timestamp = int(datetime.datetime.now().timestamp()*1000000)
+    file_name = f'{timestamp}.{content_type}'
+    today = date.today()
+    s3_file_path=f'{today.year}/{today.month}/{today.day}/'
+    img = get_white_square(img, ratio)
+    upload_image(img, file_name, s3_file_path)
+    return s3_file_path + file_name
+
+async def upload_file(file_name, bucket=AWS_S3_BUCKET_NAME_MEDIA, object_name=None):
     if object_name is None:
         object_name = file_name
 
     s3_client = boto3.client('s3')
     s3_client.upload_file(file_name, bucket, object_name, ExtraArgs={'ACL':'public-read'})
     os.remove(file_name)
-    
-    # stream byte
-    # response = s3_client.put_object( 
-    #     Bucket=bucket,
-    #     Body=byte_img,
-    #     Key=object_name,
-    #     ACL='public-read'
-    # )
