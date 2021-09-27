@@ -10,8 +10,6 @@ from datetime import date
 
 from PIL import Image
 
-from app.settings import AWS_S3_BUCKET_NAME_MEDIA
-
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
@@ -79,7 +77,7 @@ def upload_white_space_image(img, ratio):
     upload_image(img, file_name, s3_file_path)
     return s3_file_path + file_name
 
-def upload_file(file_name, bucket=AWS_S3_BUCKET_NAME_MEDIA, object_name=None):
+def upload_file(file_name, bucket="resize-media", object_name=None):
     if object_name is None:
         object_name = file_name
 

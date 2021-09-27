@@ -22,10 +22,9 @@ async def main(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-@app.post("/", response_class=PlainTextResponse)
-async def main_post(images: UploadFile = File(...), ratio: str="1"):
-    result = upload_white_space_image(images, ratio)
-    return PlainTextResponse(content=result)
+@app.post("/{ratio}", status_code=201)
+async def main_post(image: UploadFile = File(...), ratio: str="1"):
+    return upload_white_space_image(image, ratio)
 
 
 @app.get("/robots.txt", response_class=PlainTextResponse)

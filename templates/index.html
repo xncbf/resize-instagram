@@ -83,7 +83,7 @@
                         width: 3600, // maximum width
                         height: 3600 // maximum height
                     }, function(blob, didItResize) {
-                        fd.set('images', blob)
+                        fd.set('image', blob)
                         fd.append("ratio", ratio);
 
                         let xhr = new XMLHttpRequest();
@@ -93,16 +93,16 @@
                                 let e = document.getElementsByClassName('progress-download')[0];
                                 if (xhr.status===201){
                                     let res = JSON.parse(xhr.response)
-                                    e.parentElement.setAttribute('href', `https://resize-media.s3.amazonaws.com/${res[0]}`);
-                                    e.outerHTML = `${res[0].split('/')[3]}`;
+                                    e.parentElement.setAttribute('href', `https://resize-media.s3.amazonaws.com/${res}`);
+                                    e.outerHTML = `${res.split('/')[3]}`;
                                 } else {
                                     e.outerHTML = `Failed: Image size too large. can't upload upper than 10mb`;
                                 }
                             }
                             document.getElementById('btn').removeAttribute("disabled");
                         }
-                        xhr.open("POST", "/");
-                        // xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        xhr.open("POST", "/" + ratio);
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
                         xhr.send(fd);            
                         
                         // [].forEach.call(document.querySelectorAll('.progress'), function (el) {
