@@ -92,7 +92,7 @@
                             if (xhr.readyState === 4) {
                                 let e = document.getElementsByClassName('progress-download')[0];
                                 if (xhr.status===201){
-                                    let res = JSON.parse(xhr.response)                                    
+                                    let res = JSON.parse(xhr.response)
                                     e.parentElement.setAttribute('href', `https://resize-media.s3.amazonaws.com/${res[0]}`);
                                     e.outerHTML = `${res[0].split('/')[3]}`;
                                 } else {
@@ -102,7 +102,7 @@
                             document.getElementById('btn').removeAttribute("disabled");
                         }
                         xhr.open("POST", "/");
-                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        // xhr.setRequestHeader("X-CSRFToken", csrftoken);
                         xhr.send(fd);            
                         
                         // [].forEach.call(document.querySelectorAll('.progress'), function (el) {
