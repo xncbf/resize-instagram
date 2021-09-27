@@ -9,6 +9,7 @@ provider:
 
 plugins:
   - serverless-python-requirements
+  - serverless-domain-manager
 
 functions:
   app:
@@ -22,3 +23,14 @@ functions:
       - http:
           method: any
           path: /{proxy+}
+
+custom:
+  customDomain:
+    domainName: dev.resiz.io
+    certificateName: '*.resiz.io'
+    createRoute53Record: true
+    endpointType: 'edge'
+    securityPolicy: tls_1_2
+    apiType: rest
+    autoDomain: true
+    certificateArn: arn:aws:acm:us-east-1:494890851710:certificate/aecfe7e9-6847-49f1-bb85-a1d91f25cec3

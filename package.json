@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "author": "xncbf",
     "dependencies": {
+        "serverless-domain-manager": "^5.1.5",
         "serverless-python-requirements": "^5.0.1"
     }
 }
