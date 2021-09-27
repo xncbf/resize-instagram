@@ -1,0 +1,8 @@
+{
+    "name": "resiz.io",
+    "version": "1.0.0",
+    "author": "xncbf",
+    "dependencies": {
+        "serverless-python-requirements": "^5.0.1"
+    }
+}

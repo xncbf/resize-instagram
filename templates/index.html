@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% block script %}
     <script>
         document.addEventListener("DOMContentLoaded", function(){
             [].forEach.call(document.querySelectorAll('.progress'), function (el) {
@@ -101,7 +100,7 @@
                             }
                             document.getElementById('btn').removeAttribute("disabled");
                         }
-                        xhr.open("POST", "{% url 'index' %}");
+                        xhr.open("POST", "/");
                         xhr.setRequestHeader("X-CSRFToken", csrftoken);
                         xhr.send(fd);            
                         

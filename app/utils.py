@@ -1,13 +1,9 @@
-import logging
 import boto3
 import os
 
-from botocore.exceptions import ClientError
-from zappa.asynchronous import task
 
 from resize.settings import AWS_S3_BUCKET_NAME_MEDIA
 
-# @task
 def async_upload_file(file_name, bucket=AWS_S3_BUCKET_NAME_MEDIA, object_name=None):
     if object_name is None:
         object_name = file_name

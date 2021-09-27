@@ -1,0 +1,24 @@
+service: resiz-io
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: ap-northeast-2
+  stage: ${opt:stage, "master"}
+  lambdaHashingVersion: 20201221
+
+plugins:
+  - serverless-python-requirements
+
+functions:
+  app:
+    package:
+      patterns:
+        - "!node_modules/**"
+    handler: app.main.handler
+    environment:
+      STAGE: ${self:provider.stage}
+    events:
+      - http:
+          method: any
+          path: /{proxy+}
