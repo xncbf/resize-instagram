@@ -8,6 +8,11 @@ provider:
   lambdaHashingVersion: 20201221
   memorySize: 512
   timeout: 30
+  apiName: ${self:service}-${opt:stage, "master"}
+  apiGateway:
+    description: REST API ${self:service}
+    metrics: true
+
 
 plugins:
   - serverless-domain-manager
@@ -16,9 +21,7 @@ functions:
   app:
     image: 494890851710.dkr.ecr.ap-northeast-2.amazonaws.com/resiz-io@sha256:e679929e8066a61d59fe12b2ab3e392cfea2746ed934eb59cfaaedcb02798f7e
     events:
-      - http:
-          method: any
-          path: /{proxy+}
+      - http: ANY /{proxy+}
 
 custom:
   customDomain:
