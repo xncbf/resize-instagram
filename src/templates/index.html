@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+{% block script %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            [].forEach.call(document.querySelectorAll('.progress'), function (el) {
+                el.style.visibility = 'hidden';
+            });
+            [].forEach.call(document.querySelectorAll('.div-gradient'), function (el) {
+                el.style.webkitAnimationPlayState = 'paused';
+            });
+            let canvas = document.getElementById("canvas");
+            let ctx = canvas.getContext("2d");
+            const edge = canvas.parentElement.offsetWidth-50;
+            canvas.width = edge
+            canvas.height = edge
+            ctx.fillStyle = "#FFF";
+            ctx.fillRect(0, 0, edge, edge);
+        
+            
+            document.getElementById('checkbox').onchange = function(evt) {
+                if (this.checked) {
+                    [].forEach.call(document.querySelectorAll('.div-gradient'), function (el) {
+                        el.style.webkitAnimationPlayState = 'paused';
+                    });
+                } else {
+                    [].forEach.call(document.querySelectorAll('.div-gradient'), function (el) {
+                        el.style.webkitAnimationPlayState = '';
+                    });
+                }
+            };
+            function imageEventHandler(evt){
+                let input, file, fr, img;
+                input = document.getElementById('imgfile');
+                file = input.files[0];
+                fr = new FileReader();
+                fr.onload = createImage;
+                fr.readAsDataURL(file);
+
+                function createImage() {
+                    img = new Image();
+                    img.onload = imageLoaded;
+                    img.src = fr.result;
+                }
+
+                function imageLoaded() {
+                    let canvas = document.getElementById("canvas");
+                    let [canvas_x, canvas_y] = getXY(canvas, img);
+                    
+                    const radio = document.getElementsByName('group1');
+                    let ratio = getRadioValue(radio);
+
+                    let [width, height] = getCanvasSize(canvas_x, canvas_y, ratio);
+                    canvas.width = width;
+                    canvas.height = height;
+                    let [x, y] = getImagePosition(canvas, canvas_x, canvas_y);
+                    let ctx = canvas.getContext("2d");
+                    ctx.fillStyle = "#FFF";
+                    ctx.fillRect(0, 0, width, height);
+                    ctx.drawImage(img, x, y, canvas_x, canvas_y);
+                    // let dataurl = canvas.toDataURL("image/png");
+                }
+
+                window.addEventListener("resize", imageLoaded);
+            };
+
+            document.getElementById('imgfile').onchange = imageEventHandler;
+            let radios = document.getElementsByName('group1');
+            for(var i = 0;i < radios.length;i++){
+                radios[i].onchange = imageEventHandler;
+            }
+        });
+
+        function sendForm(obj){
+            let fd = new FormData();
+            input = document.getElementById('imgfile');
+            if(!input.value){ return };
+            const radio = document.getElementsByName('group1');
+            let ratio = getRadioValue(radio);
+            document.getElementById('btn').setAttribute("disabled", true);
+            for (let i = 0; i < input.files.length; i++) {
+                // 10485760 
+                ImageTools.resize(input.files[i], {
+                        width: 3600, // maximum width
+                        height: 3600 // maximum height
+                    }, function(blob, didItResize) {
+                        fd.set('image', blob)
+                        fd.append("ratio", ratio);
+
+                        let xhr = new XMLHttpRequest();
+
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4) {
+                                let e = document.getElementsByClassName('progress-download')[0];
+                                if (xhr.status===201){
+                                    let res = JSON.parse(xhr.response)
+                                    e.parentElement.setAttribute('href', `https://resize-media.s3.amazonaws.com/${res}`);
+                                    e.outerHTML = `${res.split('/')[3]}`;
+                                } else {
+                                    e.outerHTML = `Failed: Image size too large. can't upload upper than 10mb`;
+                                }
+                            }
+                            document.getElementById('btn').removeAttribute("disabled");
+                        }
+                        xhr.open("POST", "/" + ratio);
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        xhr.send(fd);            
+                        
+                        // [].forEach.call(document.querySelectorAll('.progress'), function (el) {
+                        //     el.style.visibility = '';
+                        // });
+                });
+
+                HTML = `<a download="custom-filename.jpg" class="collection-item">
+                    <div class="progress progress-download">
+                        <div class="indeterminate"></div>
+                    </div>
+                </a>`;
+                document.getElementsByClassName('collection')[0].innerHTML += HTML
+                
+            }
+            
+        }
+
+    </script>
+{% endblock %}
+{% block contents %}
+<div class='row'>
+    <div class='col s12 m9 l9'>
+        <h3 class="white-text">RESIZE FOR INSTAGRAM</h3>
+    </div>
+    <div class='col s12 m3 l3'>
+        <div class="switch hide-on-small-only right-align">
+            <label>
+            Off
+            <input type="checkbox" id='checkbox' checked>
+            <span class="lever"></span>
+            FAST MODE
+            </label>
+        </div>
+    </div>
+</div>
+<div class='row'>
+    <form action="#">
+        <!-- <img class="responsive-img" src="cool_pic.jpg"> -->
+        <div class="file-field input-field">
+            <div class="btn deep-purple accent-1">
+                <span>Upload Images</span>
+                <input type="file" id="imgfile" accept="image/*" multiple>
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Upload one or more files">
+            </div>
+        </div>
+        
+    </form>
+</div>
+<div class='row'>
+    <div class='col s12 m12 l5'>
+        <canvas id="canvas" class='hide-on-small-only'></canvas>
+    </div>
+    <div class='col s12 m12 l4'>
+        <div class="collection">
+        </div>
+    </div>
+    <div class='col s12 m12 l3'>
+        <form action="#">
+            <p>
+              <label>
+                <input value="1" class="with-gap" name="group1" type="radio" checked />
+                <span>1:1</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input value="2" class="with-gap" name="group1" type="radio" />
+                <span>4:5 (instagram feed)</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input value="3" class="with-gap" name="group1" type="radio" />
+                <span>5:4</span>
+              </label>
+            </p>
+            <!-- <p>
+              <label>
+                <input class="with-gap" name="group1" type="radio" disabled/>
+                <span>Automatically update more</span>
+              </label>
+            </p> -->
+        </form>
+        <a class="waves-effect waves-light btn deep-purple accent-1"
+            href="javascript:void(0);" onClick="sendForm();" id='btn'>Download Resized</a>
+    </div>
+</div>
+{% endblock%}
