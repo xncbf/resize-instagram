@@ -4,7 +4,7 @@ COPY Pipfile* ./
 
 RUN pip install pipenv 
 RUN pipenv install --system --deploy --ignore-pipfile
-ADD src ${LAMBDA_TASK_ROOT}
+COPY src ${LAMBDA_TASK_ROOT}
 
 CMD ["main.handler"]
 
