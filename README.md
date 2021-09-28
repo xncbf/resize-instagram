@@ -3,7 +3,7 @@
 # resize-instagram
 resize for instagram photo without cropping online
 
-[![resize instagram](https://github.com/xncbf/resize-instagram/blob/master/app/static/resize-instagram.png)](https://resiz.io/)
+[![resize instagram](https://github.com/xncbf/resize-instagram/blob/master/static/resize-instagram.png)](https://resiz.io/)
 
 # Usage:sunglasses:
 
@@ -17,11 +17,7 @@ resize for instagram photo without cropping online
 
 | original |      1:1      |  4:5  |  5:4  |
 |----------|:-------------:|------:|------:|
-| ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/origin.png) |  ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/1x1.png) | ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/4x5.png) | ![origin](https://github.com/xncbf/resize-instagram/blob/master/app/static/5x4.png) |
-
-# Progressive web app (PWA)
-
-Every devices can install PWA to make it run like a real native app.
+| ![origin](https://github.com/xncbf/resize-instagram/blob/master/static/origin.png) |  ![origin](https://github.com/xncbf/resize-instagram/blob/master/static/1x1.png) | ![origin](https://github.com/xncbf/resize-instagram/blob/master/static/4x5.png) | ![origin](https://github.com/xncbf/resize-instagram/blob/master/static/5x4.png) |
 
 # Contribute
 

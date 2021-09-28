@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  prod:
+    build:
+      context: .
+      dockerfile: ./compose/prod/Dockerfile
+    image: 494890851710.dkr.ecr.ap-northeast-2.amazonaws.com/resiz-io:latest
+    container_name: resize-prod
+    ports:
+      - 9000:8080
+
+  dev:
+    build:
+      context: .
+      dockerfile: ./compose/dev/Dockerfile
+    image: resize-dev:latest
+    container_name: resize-dev
+    volumes:
+      - ./src:/usr/src/app/src
+    ports:
+      - 8000:8000

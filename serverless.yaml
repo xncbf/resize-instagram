@@ -6,19 +6,15 @@ provider:
   region: ap-northeast-2
   stage: ${opt:stage, "master"}
   lambdaHashingVersion: 20201221
+  memorySize: 512
+  timeout: 30
 
 plugins:
-  - serverless-python-requirements
   - serverless-domain-manager
 
 functions:
   app:
-    package:
-      patterns:
-        - "!node_modules/**"
-    handler: app.main.handler
-    environment:
-      STAGE: ${self:provider.stage}
+    image: 494890851710.dkr.ecr.ap-northeast-2.amazonaws.com/resiz-io@sha256:e679929e8066a61d59fe12b2ab3e392cfea2746ed934eb59cfaaedcb02798f7e
     events:
       - http:
           method: any
