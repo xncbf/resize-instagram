@@ -8,7 +8,7 @@ import os
 
 from datetime import date
 
-from PIL import Image
+from PIL import Image, ImageFile
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -68,6 +68,8 @@ def upload_image(img, file_name, s3_file_path):
 
 def upload_white_space_image(img, ratio):
     content_type = img.content_type.split('/')[1]
+    ImageFile.LOAD_TRUNCATED_IMAGES = True
+    logger.info(img.file)
     img = Image.open(img.file).convert("RGBA")
     timestamp = int(datetime.datetime.now().timestamp()*1000000)
     file_name = f'{timestamp}.{content_type}'
