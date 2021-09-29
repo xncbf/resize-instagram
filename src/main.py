@@ -28,7 +28,7 @@ async def main_post(image: UploadFile = File(...), ratio: str="1"):
 
 
 @app.get("/robots.txt", response_class=PlainTextResponse)
-async def main(request: Request):
+async def robots(request: Request):
     return templates.TemplateResponse("robots.txt", {"request": request})
 
 handler = Mangum(app)
