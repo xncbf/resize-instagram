@@ -69,6 +69,11 @@ def upload_image(img, file_name, s3_file_path):
 def upload_white_space_image(img, ratio):
     ImageFile.LOAD_TRUNCATED_IMAGES = True
     content_type = img.content_type.split('/')[1]
+    print("img.content_type: %s" % img.content_type)
+    print("img.file: %s" % img.file)
+    print("img.file.name: %s" % img.file.name)
+    print("img.file.mode: %s" % img.file.mode)
+    print("img.file.tell(): %s" % img.file.tell())
     img = Image.open(img.file)
     img = img.convert("RGBA")
     timestamp = int(datetime.datetime.now().timestamp()*1000000)

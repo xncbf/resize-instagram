@@ -18,7 +18,7 @@ plugins:
 
 functions:
   app:
-    image: 494890851710.dkr.ecr.ap-northeast-2.amazonaws.com/resiz-io@sha256:8b4c90db2511c54a17c9f83affd5c29a95976655f29d4cfdef917729a34ec0f8
+    image: 494890851710.dkr.ecr.ap-northeast-2.amazonaws.com/resiz-io@sha256:7fb0220010a3f4c072168880540527dcc457a635d10919be591b0903cc2ccc62
     events:
       - http: ANY /{proxy+}
 
