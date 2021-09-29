@@ -2,7 +2,6 @@ service: resiz-io
 
 provider:
   name: aws
-  runtime: python3.9
   region: ap-northeast-2
   stage: ${opt:stage, "master"}
   lambdaHashingVersion: 20201221
@@ -19,7 +18,7 @@ plugins:
 
 functions:
   app:
-    image: 494890851710.dkr.ecr.ap-northeast-2.amazonaws.com/resiz-io@sha256:8457fa10e4d578a0de83464735c55956ff56bcd64f6d27bc7dc95c124d6a5a45
+    image: 494890851710.dkr.ecr.ap-northeast-2.amazonaws.com/resiz-io@sha256:8b4c90db2511c54a17c9f83affd5c29a95976655f29d4cfdef917729a34ec0f8
     events:
       - http: ANY /{proxy+}
 
