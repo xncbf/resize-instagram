@@ -69,7 +69,8 @@ def upload_image(img, file_name, s3_file_path):
 def upload_white_space_image(img, ratio):
     content_type = img.content_type.split('/')[1]
     ImageFile.LOAD_TRUNCATED_IMAGES = True
-    img = Image.open(img).convert("RGBA")
+    img = Image.open(img.file)
+    img = img.convert("RGBA")
     timestamp = int(datetime.datetime.now().timestamp()*1000000)
     file_name = f'{timestamp}.{content_type}'
     today = date.today()
