@@ -26,10 +26,14 @@ resize for instagram photo without cropping online
 # deployment
 
 docker-compose build prod
-docker push {ecr}:latest
+aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 494890851710.dkr.ecr.ap-northeast-2.amazonaws.com
+docker push 494890851710.dkr.ecr.ap-northeast-2.amazonaws.com/resiz-io:latest
 update digest on `serverless.yaml`
 sls deploy
 
+# logging
+
+sls logs --tail -f app
 # Contribute
 
 Please submit a PR for better functionality

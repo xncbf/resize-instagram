@@ -23,6 +23,7 @@ aiofiles = "==0.7.0"
 boto3 = "==1.18.48"
 python-multipart = "==0.0.5"
 typing-extensions = "==3.10.0.2"
+olefile = "==0.46"
 
 [requires]
 python_version = "3.9"

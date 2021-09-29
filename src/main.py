@@ -1,5 +1,4 @@
 import os
-from typing import List
 
 from fastapi import FastAPI, Request, File, UploadFile
 from fastapi.responses import HTMLResponse, PlainTextResponse
@@ -18,12 +17,12 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
-async def main(request: Request):
+def main(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.post("/{ratio}", status_code=201)
-async def main_post(image: UploadFile = File(...), ratio: str="1"):
+def main_post(image: UploadFile = File(...), ratio: str="1"):
     return upload_white_space_image(image, ratio)
 
 
