@@ -17,19 +17,19 @@
             "expression": "rate(4 minutes)"
         },
         {
-            "function": "core.tasks.keep_concurrency",
+            "function": "app.tasks.keep_concurrency",
             "expression": "rate(4 minutes)"
         },
         {
-            "function": "core.tasks.keep_concurrency",
+            "function": "app.tasks.keep_concurrency",
             "expression": "rate(4 minutes)"
         },
         {
-            "function": "core.tasks.keep_concurrency",
+            "function": "app.tasks.keep_concurrency",
             "expression": "rate(4 minutes)"
         },
         {
-            "function": "core.tasks.keep_concurrency",
+            "function": "app.tasks.keep_concurrency",
             "expression": "rate(4 minutes)"
         }
     ]
