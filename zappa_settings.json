@@ -10,5 +10,27 @@
         "s3_bucket": "zappa-upload-bucket1",
         "domain": "resiz.io",
         "certificate_arn": "arn:aws:acm:us-east-1:494890851710:certificate/aecfe7e9-6847-49f1-bb85-a1d91f25cec3"
-    }
+    },
+    "events": [
+        {
+            "function": "app.tasks.keep_concurrency",
+            "expression": "rate(4 minutes)"
+        },
+        {
+            "function": "core.tasks.keep_concurrency",
+            "expression": "rate(4 minutes)"
+        },
+        {
+            "function": "core.tasks.keep_concurrency",
+            "expression": "rate(4 minutes)"
+        },
+        {
+            "function": "core.tasks.keep_concurrency",
+            "expression": "rate(4 minutes)"
+        },
+        {
+            "function": "core.tasks.keep_concurrency",
+            "expression": "rate(4 minutes)"
+        }
+    ]
 }
