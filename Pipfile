@@ -8,7 +8,7 @@ django-pwa = "==1.0.8"
 django-s3-storage = "==0.13.0"
 psycopg2-binary = "==2.8.3"
 Django = "==3.2.8"
-Pillow = "==8.3.2"
+Pillow = "==9.0.0"
 zappa = {ref = "master", git = "git://github.com/TravelFlanDev/Zappa.git"}
 
 [dev-packages]
